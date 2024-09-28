@@ -3,26 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="scss/main.css">
-
     <title>Document</title>
 </head>
 <body>
-
-    <header>Le menu d'arcadia </header>
-    
+    <header>
+        <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="/">Arcadia</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link" href="/">Accueil</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/services">Les services</a>
+                  </li>
+                  <li class="nav-item"></li>
+                    <a class="nav-link" href="/habitats">Les habitats</a>
+                  </li>
+                  <li class="nav-item"></li>
+                    <a class="nav-link" href="/contact">Contact</a>
+                  </li>
+                  <li class="nav-item dropdown"></li>
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Espace vétérinaire
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Gestion des comptes rendus des animaux</a></li>
+                    </ul>
+                    <li><hr class="dropdown-divider"></li>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Alimentation quotidienne des animaux</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item dropdown"></li>
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Espace employé
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Gestion de l'alimentation quotidienne des animaux</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Administration
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Gestion des utilisateurs</a></li>
+                      <li><a class="dropdown-item" href="#">Gestion des services</a></li>
+                      <li><a class="dropdown-item" href="#">Gestion des habitats</a></li>
+                      <li><a class="dropdown-item" href="#">Gestion des animaux</a></li>
+                      <li><a class="dropdown-item" href="#">Gestion des horaires</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Les comptes rendus des vétérinaires</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Tableau de board</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item"></li>
+                    <a class="nav-link" href="/login">Connexion</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+    </header>
 
     <main id="main-page">
-        <!--le contenu de la page sera injecté ici-->
+        <!-- le contenu de la page -->
     </main>
 
-    <footer>le footer d'arcadia</footer>
-    
+    <footer>Le footer</footer>
+
     <script type="module" src="Router/router.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
