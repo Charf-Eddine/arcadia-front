@@ -11989,4 +11989,9 @@ p {
 
 .form-label {
   color: #5C6102;
+}
+
+h1, .h1 {
+  font-family: "Hind Madurai", serif;
+  color: #5C6102;
 }/*# sourceMappingURL=main.css.map */
