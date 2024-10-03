@@ -1,67 +1,93 @@
-const emailInput = document.getElementById("emailInput");
-const passwordInput = document.getElementById("passwordInput");
-const signinButton =  document.getElementById("signinButton");
+const tokenCookieName = "accessToken";
+const roleCookieName = "role";
 
-emailInput.addEventListener("keyup", validateForm);
-passwordInput.addEventListener("keyup", validateForm);
-signinButton.addEventListener("click", checkCredentials);
+const signoutButton =  document.getElementById("signoutButton");
+signoutButton.addEventListener("click", signout);
 
-signinButton.disabled = true;
-
-function validateForm(){
-    const emailOk = validateEmail(emailInput);
-    const passwordOk = validateRequired(passwordInput);
-
-    if (emailOk && passwordOk) {
-        signinButton.disabled = false;
-    }
-    else {
-        signinButton.disabled = true;
-    }
+function getRole() {
+    return getCookie(roleCookieName);
 }
 
-function validateRequired(input){
-    if(input.value != ''){
-        input.classList.add("is-valid");
-        input.classList.remove("is-invalid"); 
-        return true;
+function signout(){
+    eraseCookie(tokenCookieName);
+    window.location.reload();
+}
+
+function setToken(token){
+    setCookie(tokenCookieName, token, 7);
+}
+
+function getToken(){
+    return getCookie(tokenCookieName);
+}
+
+function setCookie(name,value,days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
     }
-    else{
-        input.classList.remove("is-valid");
-        input.classList.add("is-invalid");
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
+function eraseCookie(name) {   
+    document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+function isConnected(){
+    if(getToken() == null || getToken == undefined){
         return false;
     }
-}
-
-function validateEmail(input){
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const email = input.value;
-    if(email.match(emailRegex)){
-        input.classList.add("is-valid");
-        input.classList.remove("is-invalid"); 
+    else{
         return true;
     }
-    else{
-        input.classList.remove("is-valid");
-        input.classList.add("is-invalid");
-        return false;
-    }
 }
 
-function checkCredentials(){
-    //Ici, il faudra appeler l'API pour vérifier les credentials en BDD
-    
-    if(emailInput.value == "test@mail.com" && passwordInput.value == "123"){
-        //Il faudra récupérer le vrai token
-        const token = "lkjsdngfljsqdnglkjsdbglkjqskjgkfjgbqslkfdgbskldfgdfgsdgf";
-        setToken(token);
-        //placer ce token en cookie
+function showAndHideElementsForRoles() {
+    const userConnected = isConnected();
+    const role = getRole();
 
-        setCookie(RoleCookieName, "admin", 7);
-        window.location.replace("/");
-    }
-    else{
-        emailInput.classList.add("is-invalid");
-        passwordInput.classList.add("is-invalid");
-    }
+    let allElementsToEdit = document.querySelectorAll('[data-show]')
+
+    allElementsToEdit.forEach(element => {
+        switch(element.dataset.show) {
+            case 'disconnected':
+                if (userConnected) {
+                    element.classList.add("d-none");
+                }
+                break;
+            case 'connected':
+                if (!userConnected) {
+                    element.classList.add("d-none");
+                }
+                break;
+            case 'admin':
+                if (!userConnected || role != "admin") {
+                    element.classList.add("d-none");
+                }
+                break;                
+            case 'employee':
+                if (!userConnected || role != "employee") {
+                    element.classList.add("d-none");
+                }
+                break;   
+            case 'veterinarian':
+                if (!userConnected || role != "veterinarian") {
+                    element.classList.add("d-none");
+                }
+                break;
+        }
+    })
 }
