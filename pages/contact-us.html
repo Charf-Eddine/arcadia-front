@@ -1,20 +1,29 @@
-<div class="container"></div>
-    <h1>Contactez-nous</h1>
-    <form>
-        <div class="mb-3">
-          <label for="emailInput" class="form-label">Email</label>
-          <input type="email" class="form-control" id="emailInput" name="email">
+<div class="container">
+  <h1>Contactez-nous</h1>
+  <form>
+      <div class="mb-3">
+        <label for="emailInput" class="form-label">Email</label>
+        <input type="email" class="form-control" id="emailInput" name="email">
+        <div class="invalid-feedback">
+          L'email n'est pas au bon format
         </div>
-        <div class="mb-3">
-          <label for="titleInput" class="form-label">Titre</label>
-          <input type="text" class="form-control" id="titleInput" name="title">
+      </div>
+      <div class="mb-3">
+        <label for="titleInput" class="form-label">Titre</label>
+        <input type="text" class="form-control" id="titleInput" name="title">
+        <div class="invalid-feedback">
+          Le titre est requis
         </div>
-        <div class="mb-3">
-          <label for="messageTextarea" class="form-label">Message</label>
-          <textarea class="form-control" id="messageTextarea" style="height: 100px" name="message"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="messageTextarea" class="form-label">Message</label>
+        <textarea class="form-control" id="messageTextarea" style="height: 100px" name="message"></textarea>
+        <div class="invalid-feedback">
+          Le message est requis
         </div>
-        <div class="text-center">
-            <button type="submit" class="btn btn-primary">Envoyer</button>
-        </div>
-    </form>
+      </div>
+      <div class="text-center">
+          <button type="submit" class="btn btn-primary" id="contactUsButton">Envoyer</button>
+      </div>
+  </form>
 </div>
