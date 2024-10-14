@@ -80,7 +80,7 @@ function contactUs() {
         redirect: 'follow'
     };
     
-    fetch("http://localhost:3001/mailing/contact-us", requestOptions)
+    fetch(apiUrl + "/mailing/contact-us", requestOptions)
       .then((response) => {
         if(response.ok){
             return true;
