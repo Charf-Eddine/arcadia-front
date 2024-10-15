@@ -1,94 +1,85 @@
-const tokenCookieName = "accessToken";
-const roleCookieName = "role";
-const apiUrl = "http://localhost:3001";
+import Route from "./Route.js";
+import { allRoutes, websiteName } from "./allRoutes.js";
 
-const signoutButton =  document.getElementById("signoutButton");
-signoutButton.addEventListener("click", signout);
+// Création d'une route pour la page 404 (page introuvable)
+const route404 = new Route("404", "Page introuvable", "/pages/404.html", []);
 
-function getRole() {
-    return getCookie(roleCookieName);
-}
-
-function signout(){
-    eraseCookie(tokenCookieName);
-    window.location.reload();
-}
-
-function setToken(token){
-    setCookie(tokenCookieName, token, 7);
-}
-
-function getToken(){
-    return getCookie(tokenCookieName);
-}
-
-function setCookie(name,value,days) {
-    var expires = "";
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days*24*60*60*1000));
-        expires = "; expires=" + date.toUTCString();
+// Fonction pour récupérer la route correspondant à une URL donnée
+const getRouteByUrl = (url) => {
+  let currentRoute = null;
+  // Parcours de toutes les routes pour trouver la correspondance
+  allRoutes.forEach((element) => {
+    if (element.url == url) {
+      currentRoute = element;
     }
-    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
-}
+  });
+  // Si aucune correspondance n'est trouvée, on retourne la route 404
+  if (currentRoute != null) {
+    return currentRoute;
+  } else {
+    return route404;
+  }
+};
 
-function getCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-    }
-    return null;
-}
+// Fonction pour charger le contenu de la page
+const LoadContentPage = async () => {
+  const path = window.location.pathname;
+  // Récupération de l'URL actuelle
+  const actualRoute = getRouteByUrl(path);
 
-function eraseCookie(name) {   
-    document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-}
+  //Vérifier les droits d'accès à la page
+  const allRolesArray = actualRoute.authorize;
 
-function isConnected(){
-    if(getToken() == null || getToken == undefined){
-        return false;
+  if(allRolesArray.length > 0){
+    if(allRolesArray.includes("disconnected")){
+      if(isConnected()){
+        window.location.replace("/");
+      }
     }
     else{
-        return true;
+      const roleUser = getRole();
+      if(!allRolesArray.includes(roleUser)){
+        window.location.replace("/");
+      }
     }
-}
+  }
 
-function showAndHideElementsForRoles() {
-    const userConnected = isConnected();
-    const role = getRole();
+  // Récupération du contenu HTML de la route
+  const html = await fetch(actualRoute.pathHtml).then((data) => data.text());
+  // Ajout du contenu HTML à l'élément avec l'ID "main-page"
+  document.getElementById("main-page").innerHTML = html;
 
-    let allElementsToEdit = document.querySelectorAll('[data-show]')
+  // Ajout du contenu JavaScript
+  if (actualRoute.pathJS != "") {
+    // Création d'une balise script
+    let scriptTag = document.createElement("script");
+    scriptTag.setAttribute("type", "text/javascript");
+    scriptTag.setAttribute("src", actualRoute.pathJS);
 
-    allElementsToEdit.forEach(element => {
-        switch(element.dataset.show) {
-            case 'disconnected':
-                if (userConnected) {
-                    element.classList.add("d-none");
-                }
-                break;
-            case 'connected':
-                if (!userConnected) {
-                    element.classList.add("d-none");
-                }
-                break;
-            case 'admin':
-                if (!userConnected || role != "admin") {
-                    element.classList.add("d-none");
-                }
-                break;                
-            case 'employee':
-                if (!userConnected || role != "employee") {
-                    element.classList.add("d-none");
-                }
-                break;   
-            case 'veterinarian':
-                if (!userConnected || role != "veterinarian") {
-                    element.classList.add("d-none");
-                }
-                break;
-        }
-    })
-}
+    // Ajout de la balise script au corps du document
+    document.querySelector("body").appendChild(scriptTag);
+  }
+
+  // Changement du titre de la page
+  document.title = actualRoute.title + " - " + websiteName;
+
+  // Afficher et masquer les éléments en fonction du rôle
+  showAndHideElementsForRoles();
+};
+
+// Fonction pour gérer les événements de routage (clic sur les liens)
+const routeEvent = (event) => {
+  event = event || window.event;
+  event.preventDefault();
+  // Mise à jour de l'URL dans l'historique du navigateur
+  window.history.pushState({}, "", event.target.href);
+  // Chargement du contenu de la nouvelle page
+  LoadContentPage();
+};
+
+// Gestion de l'événement de retour en arrière dans l'historique du navigateur
+window.onpopstate = LoadContentPage;
+// Assignation de la fonction routeEvent à la propriété route de la fenêtre
+window.route = routeEvent;
+// Chargement du contenu de la page au chargement initial
+LoadContentPage();
