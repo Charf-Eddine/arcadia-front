@@ -1,5 +1,6 @@
 <div class="container p-4"></div>
     <h1 class="text-center text-primary">Gestion des utilisateurs</h1>
+    <button class="btn btn-primary mb-3 float-end" data-bs-toggle="modal" data-bs-target="#userModal" onclick="clearModal()">Créer un utilisateur</button>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -19,4 +20,83 @@
         <ul class="pagination justify-content-center" id="pagination">
         </ul>
     </nav>
+</div>
+
+
+<!-- Modal création / édition utilisateur -->
+<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="userModalLabel">Edition utilisateur</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form id="userForm">
+                <input type="hidden" id="userId">
+                <div class="mb-3">
+                    <label for="firstname" class="form-label">Prénom</label>
+                    <input type="text" class="form-control" id="firstname" name="firstname" required>
+                    <div class="invalid-feedback">
+                      Le prénom est requis
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="lastname" class="form-label">Nom</label>
+                    <input type="text" class="form-control" id="lastname" name="lastname" required>
+                    <div class="invalid-feedback">
+                      Le nom est requis
+                    </div>
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" name="email" required>
+                  <div class="invalid-feedback">
+                    L'email n'est pas au bon format
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="role" class="form-label">Rôle</label>
+                    <select class="form-control" id="role" name="role" required>
+                      <option value="admin">Administrateur</option>
+                      <option value="employee">Employé</option>
+                      <option value="veterinarian">Vétérinaire</option>
+                    </select>
+                </div>                
+            
+                <div class="mb-3">
+                    <label for="password" class="form-label">Mot de passe</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                    <div class="invalid-feedback">
+                      Le mot de passe est requis
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+            <button type="button" class="btn btn-primary" onclick="saveUser()">Enregistrer</button>
+          </div>
+      </div>
+    </div>
+</div>
+  
+<!-- Modal suppression utilisateur -->
+<div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="deleteUserLabel">Confirmation de suppression</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            Êtes-vous sûr de vouloir supprimer cet utilisateur ?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+            <button type="button" class="btn btn-danger" onclick="deleteUser()">Confirmer</button>
+        </div> 
+      </div>
+    </div>
 </div>

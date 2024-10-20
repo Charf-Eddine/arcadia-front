@@ -1,23 +1,29 @@
-const usersPerPage = 5; // Nombre d'utilisateurs par page
+const usersPerPage = 10; // Nombre d'utilisateurs par page
 let currentPage = 1;
 let users = []; // Tableau pour stocker tous les utilisateurs
+let currentUserId = null;
+
+// Récupérer la liste des utilisateurs au chargement de la page
+fetchUsers();
 
 // Fonction pour appeler l'API et récupérer la liste des utilisateurs
-fetch(apiUrl + "/users")
-.then(response => {
-    if(response.ok){
-        return response.json();
-    }
-    else{
-        alert("Erreur lors de la récupération des utilisateurs");
-    }
-})
-.then(data => {
-    users = data;
-    renderUsers(currentPage);
-    renderPagination();
-})
-.catch(error => console.error('Erreur lors de la récupération des utilisateurs :', error));
+function fetchUsers() {
+    fetch(`${apiUrl}/users`)
+    .then(response => {
+        if(response.ok){
+            return response.json();
+        }
+        else{
+            alert("Erreur lors de la récupération des utilisateurs");
+        }
+    })
+    .then(data => {
+        users = data;
+        renderUsers(currentPage);
+        renderPagination();
+    })
+    .catch(error => console.error('Erreur lors de la récupération des utilisateurs :', error));
+}
 
 function renderUsers(page) {
     const userTableBody = document.getElementById('userTableBody');
@@ -35,8 +41,8 @@ function renderUsers(page) {
                 <td>${user.email}</td>
                 <td>${displayUserRole(user)}</td>
                 <td>
-                    <button class="btn btn-primary btn-sm" onclick="editUser(${user.id})">Éditer</button>
-                    <button class="btn btn-danger btn-sm" onclick="deleteUser(${user.id})">Supprimer</button>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="editUser(${user.id})" data-bs-toggle="modal" data-bs-target="#userModal">Éditer</button>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(${user.id})" data-bs-toggle="modal" data-bs-target="#deleteUserModal">Supprimer</button>
                 </td>
             </tr>
         `;
@@ -82,12 +88,77 @@ function displayUserRole(user) {
     }
 }
 
-function editUser(userId) {
-    alert("Édition de l'utilisateur avec ID: " + userId);
+function clearModal() {
+    document.getElementById('userModalLabel').innerText = 'Créer un utilisateur';
+    document.getElementById('firstname').value = '';
+    document.getElementById('lastname').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('role').value = '';
+    document.getElementById('password').value = '';
+    currentUserId = null;
 }
 
-function deleteUser(userId) {
-    if (confirm("Êtes-vous sûr de vouloir supprimer cet utilisateur ?")) {
-        alert("Utilisateur supprimé avec ID: " + userId);
+function editUser(userId) {
+    fetch(`${apiUrl}/users/${userId}`)
+    .then(response => response.json())
+    .then(user => {
+      document.getElementById('userModalLabel').innerText = "Éditer l'utilisateur";
+      document.getElementById('firstname').value = user.firstname;
+      document.getElementById('lastname').value = user.lastname;
+      document.getElementById('email').value = user.email;
+      document.getElementById('role').value = user.role;
+      document.getElementById('password').value = user.password;
+      currentUserId = user.id;
+    });
+}
+
+function saveUser() {
+    const firstname = document.getElementById('firstname').value;
+    const lastname = document.getElementById('lastname').value;
+    const email = document.getElementById('email').value;
+    const role = document.getElementById('role').value;
+    const password = document.getElementById('password').value;
+
+    const user = { firstname, lastname, email, role, password };
+
+    if (currentUserId) {
+        // Editer un utilisateur existant
+        fetch(`${apiUrl}/users/${currentUserId}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(user)
+        }).then(() => {
+            fetchUsers();
+            document.getElementById('userForm').reset();
+            document.querySelector('[data-bs-dismiss="modal"]').click();
+        });
+    } else {
+        // Créer un nouvel utilisateur
+        fetch(`${apiUrl}/users`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(user)
+        }).then(() => {
+            fetchUsers();
+            document.getElementById('userForm').reset();
+            document.querySelector('[data-bs-dismiss="modal"]').click();
+        });
     }
+}
+
+function confirmDelete(userId) {
+    currentUserId = userId;
+}
+
+function deleteUser() {
+    fetch(`${apiUrl}/users/${currentUserId}`, {
+        method: 'DELETE'
+    }).then(() => {
+        fetchUsers();
+
+        // Fermer explicitement le modal en utilisant l'API Bootstrap
+        const deleteUserModalElement = document.getElementById('deleteUserModal');
+        const modalInstance = bootstrap.Modal.getInstance(deleteUserModalElement);
+        modalInstance.hide();
+    });
 }
