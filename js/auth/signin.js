@@ -88,3 +88,15 @@ function checkCredentials(){
     })
     .catch(error => console.log('error', error));
 }
+
+const togglePassword = document.querySelector('.toggle-password');
+
+togglePassword.addEventListener('click', function () {
+    // Vérifie le type actuel de l'input
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    
+    // Change l'icône en fonction de l'état
+    this.classList.toggle('bi-eye'); // Ajoute l'icône "oeil"
+    this.classList.toggle('bi-eye-slash'); // Enlève l'icône "oeil barré"
+});

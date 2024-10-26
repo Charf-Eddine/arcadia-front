@@ -17,7 +17,7 @@ footer.footer {
     width: 100%;
 }
 
-p{
+p {
     font-family: $font-family-serif;
     font-size: 18px;
 }
@@ -29,4 +29,24 @@ p{
 h1 {
     font-family: $font-family-serif;
     color: $primary;
+}
+
+div.password-box {
+  display: flex; 
+  align-items: center; 
+  background-color: #fff; 
+}
+
+label .bi {
+  font-size: 25px;
+}
+
+.password-box .bi {
+  font-size: 25px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.bi::before {
+  color: var(--bs-primary);
 }

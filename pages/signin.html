@@ -10,7 +10,10 @@
       </div>
       <div class="mb-3">
         <label for="passwordInput" class="form-label">Mot de passe</label>
-        <input type="password" class="form-control" id="passwordInput" name="password">
+        <div class="password-box">
+          <input type="password" class="form-control" id="passwordInput" name="password">
+          <i class="toggle-password bi bi-eye-slash" style="cursor: pointer;"></i>  
+        </div>
         <div class="invalid-feedback">
           Le mot de passe est requis
         </div>

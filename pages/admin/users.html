@@ -1,4 +1,4 @@
-<div class="container p-4"></div>
+<div class="container p-4">
     <h1 class="text-center text-primary">Gestion des utilisateurs</h1>
     <button class="btn btn-primary mb-3 float-end" data-bs-toggle="modal" data-bs-target="#userModal" onclick="clearModal()">Créer un utilisateur</button>
     <table class="table table-striped">
@@ -65,9 +65,12 @@
                     </select>
                 </div>                
             
-                <div class="mb-3">
+                <div class="mb-3 position-relative">
                     <label for="password" class="form-label">Mot de passe</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
+                    <div class="password-box">
+                      <input type="password" class="form-control" id="password" name="password" required>
+                      <i class="toggle-password bi bi-eye-slash" style="cursor: pointer;"></i>  
+                    </div>
                     <div class="invalid-feedback">
                       Le mot de passe est requis
                     </div>

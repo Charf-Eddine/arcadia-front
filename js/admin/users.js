@@ -1,7 +1,7 @@
-const usersPerPage = 10; // Nombre d'utilisateurs par page
-let currentPage = 1;
-let users = []; // Tableau pour stocker tous les utilisateurs
-let currentUserId = null;
+var usersPerPage = 5; // Nombre d'utilisateurs par page
+var currentPage = 1;
+var users = []; // Tableau pour stocker tous les utilisateurs
+var currentUserId = null;
 
 // Récupérer la liste des utilisateurs au chargement de la page
 fetchUsers();
@@ -58,17 +58,20 @@ function renderPagination() {
     for (let i = 1; i <= totalPages; i++) {
         const pageItem = `
             <li class="page-item ${i === currentPage ? 'active' : ''}">
-                <a class="page-link" href="#" onclick="changePage(${i})">${i}</a>
+                <a class="page-link" href="#" onclick="changePage(${i}, event)">${i}</a>
             </li>
         `;
         pagination.insertAdjacentHTML('beforeend', pageItem);
     }
 }
 
-function changePage(page) {
+function changePage(page, event) {
+    if (event) {
+        event.preventDefault(); // Empêche le rechargement de la page
+    }
     currentPage = page;
     renderUsers(currentPage); // Met à jour l'affichage des utilisateurs pour la nouvelle page
-    renderPagination()
+    renderPagination();
 }
 
 function displayUserRole(user) {
@@ -162,3 +165,16 @@ function deleteUser() {
         modalInstance.hide();
     });
 }
+
+const passwordInput = document.getElementById('password');
+const togglePassword = document.querySelector('.toggle-password');
+
+togglePassword.addEventListener('click', function () {
+    // Vérifie le type actuel de l'input
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    
+    // Change l'icône en fonction de l'état
+    this.classList.toggle('bi-eye'); // Ajoute l'icône "oeil"
+    this.classList.toggle('bi-eye-slash'); // Enlève l'icône "oeil barré"
+});
