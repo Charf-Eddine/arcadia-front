@@ -28,7 +28,7 @@ function displayServices(schedules) {
         if (schedule.opening && schedule.closing) {
             scheduleCell.textContent = formatTime(schedule.opening) + " - " + formatTime(schedule.closing);
         }
-        else if (!schedule.opening && !schedule.closing) {
+        else if (!schedule.opening || !schedule.closing) {
             scheduleCell.textContent = "Fermé";
         }
         else {
