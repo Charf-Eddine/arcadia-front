@@ -1,16 +1,17 @@
 <div class="container p-4">
-    <h1 class="text-center text-primary">Gestion des habitats</h1>
-    <button class="btn btn-primary mb-3 float-end" data-bs-toggle="modal" data-bs-target="#habitatModal" onclick="clearModal()">Créer un habitat</button>
+    <h1 class="text-center text-primary">Gestion des animaux</h1>
+    <button class="btn btn-primary mb-3 float-end" data-bs-toggle="modal" data-bs-target="#animalModal" onclick="clearModal();loadBreeds();loadHabitats()">Créer un animal</button>
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>Nom</th>
-                <th>Description</th>
+                <th>Race</th>
+                <th>Habitat</th>
                 <th>Images</th>
                 <th style="width: 160px;">Actions</th>
             </tr>
         </thead>
-        <tbody id="habitatTableBody">
+        <tbody id="animalTableBody">
         </tbody>
     </table>
 
@@ -22,17 +23,17 @@
 </div>
 
 
-<!-- Modal création / édition habitat -->
-<div class="modal fade" id="habitatModal" tabindex="-1" aria-labelledby="habitatModalLabel" aria-hidden="true">
+<!-- Modal création / édition animal -->
+<div class="modal fade" id="animalModal" tabindex="-1" aria-labelledby="animalModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="habitatModalLabel">Edition habitat</h1>
+          <h1 class="modal-title fs-5" id="animalModalLabel">Edition utilisateur</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form id="habitatForm" enctype="multipart/form-data">
-                <input type="hidden" id="habitatId">
+            <form id="animalForm" enctype="multipart/form-data">
+                <input type="hidden" id="animalId">
                 <div class="mb-3">
                     <label for="name" class="form-label">Nom</label>
                     <input type="text" class="form-control" id="name" name="name" required>
@@ -41,8 +42,22 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                  <label for="description" class="form-label">Description</label>
-                  <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                  <label for="breedId" class="form-label">Race</label>
+                  <select class="form-select" id="breedId" name="breedId" required>
+                      <option value="" disabled selected>Sélectionner la race</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    La race est requise
+                  </div>
+                </div>
+                <div class="mb-3">
+                    <label for="habitatId" class="form-label">Habitat</label>
+                    <select class="form-select" id="habitatId" name="habitatId" required>
+                        <option value="" disabled selected>Sélectionner l'habitat</option>
+                    </select>
+                    <div class="invalid-feedback">
+                      L'habitat est requis
+                    </div>
                 </div>
                 <div class="mb-3">
                   <label for="images" class="form-label">Images</label>
@@ -53,26 +68,26 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-            <button type="button" class="btn btn-primary" onclick="saveHabitat()">Enregistrer</button>
+            <button type="button" class="btn btn-primary" onclick="saveAnimal()">Enregistrer</button>
           </div>
       </div>
     </div>
 </div>
   
-<!-- Modal suppression habitat -->
-<div class="modal fade" id="deleteHabitatModal" tabindex="-1" aria-labelledby="deleteHabitatLabel" aria-hidden="true">
+<!-- Modal suppression animal -->
+<div class="modal fade" id="deleteAnimalModal" tabindex="-1" aria-labelledby="deleteAnimalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="deleteHabitatLabel">Confirmation de suppression</h1>
+          <h1 class="modal-title fs-5" id="deleteAnimalLabel">Confirmation de suppression</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            Êtes-vous sûr de vouloir supprimer cet habitat ?
+            Êtes-vous sûr de vouloir supprimer cet animal ?
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-            <button type="button" class="btn btn-danger" onclick="deleteHabitat()">Confirmer</button>
+            <button type="button" class="btn btn-danger" onclick="deleteAnimal()">Confirmer</button>
         </div> 
       </div>
     </div>

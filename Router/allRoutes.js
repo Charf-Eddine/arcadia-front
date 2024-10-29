@@ -10,6 +10,7 @@ export const allRoutes = [
     new Route("/user-management", "Gestion des utilisateurs", "/pages/admin/users.html", [],"/js/admin/users.js"),
     new Route("/service-management", "Gestion des services", "/pages/admin/services.html", [],"/js/admin/services.js"),
     new Route("/habitat-management", "Gestion des habitats", "/pages/admin/habitats.html", [],"/js/admin/habitats.js"),
+    new Route("/animal-management", "Gestion des animaux", "/pages/admin/animals.html", [],"/js/admin/animals.js"),
     new Route("/schedule-management", "Gestion des horaires", "/pages/admin/schedules.html", [],"/js/admin/schedules.js"),
 ];
 
