@@ -12,6 +12,7 @@ export const allRoutes = [
     new Route("/habitat-management", "Gestion des habitats", "/pages/admin/habitats.html", [],"/js/admin/habitats.js"),
     new Route("/animal-management", "Gestion des animaux", "/pages/admin/animals.html", [],"/js/admin/animals.js"),
     new Route("/schedule-management", "Gestion des horaires", "/pages/admin/schedules.html", [],"/js/admin/schedules.js"),
+    new Route("/daily-feed-management", "Alimentation quotidienne des animaux", "/pages/employee/daily-feeds.html", [],"/js/employee/daily-feeds.js"),
 ];
 
 //Le titre s'affiche comme ceci : Route.titre - websitename
