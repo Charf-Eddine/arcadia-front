@@ -11,7 +11,7 @@ function getRole() {
 
 function signout(){
     eraseCookie(tokenCookieName);
-    window.location.reload();
+    window.location.replace("/");
 }
 
 function setToken(token){
