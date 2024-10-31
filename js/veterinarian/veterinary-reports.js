@@ -7,23 +7,28 @@ const accessToken = getToken();
 const role = getRole();
 var userProfile = null;
 
+const titleElement = document.getElementById("title");
 const addReportButton = document.getElementById('addReportButton');
 const actionsHeader = document.getElementById('actionsHeader');
 
 if (role === 'veterinarian') {
+    titleElement.textContent = "Mes comptes rendus des animaux";
     addReportButton.style.display = 'block'; // Affiche le bouton
     actionsHeader.style.display = 'table-cell'; // Affiche la colonne Actions
 } else {
+    titleElement.textContent = "Comptes rendus des vétérinaires";
     addReportButton.style.display = 'none'; // Cache le bouton
     actionsHeader.style.display = 'none'; // Cache la colonne Actions
 }
+
+const url = role === 'veterinarian' ? `${apiUrl}/veterinary-reports/find-by-user` : `${apiUrl}/veterinary-reports`;
 
 // Récupérer la liste des rapports au chargement de la page
 fetchVeterinaryReports();
 
 // Fonction pour appeler l'API et récupérer la liste des rapports
 function fetchVeterinaryReports() {
-    fetch(`${apiUrl}/veterinary-reports`, {
+    fetch(url, {
         method: 'GET',
         headers: {
         'Authorization': `Bearer ${accessToken}`,
@@ -119,7 +124,6 @@ async function loadUserProfile() {
 
         userProfile = await response.json();
         document.getElementById('userId').value = userProfile.sub;
-        document.getElementById('user').value = userProfile.user.firstname + " " + userProfile.user.lastname;
     } catch (error) {
         console.error('Erreur lors du chargement du profil de l\'utilisateur:', error);
         throw error;
@@ -193,9 +197,6 @@ async function editVeterinaryReport(veterinaryReportId) {
       document.getElementById('state').value = veterinaryReport.state;
       document.getElementById('stateDetail').value = veterinaryReport.stateDetail;
       document.getElementById('userId').value = veterinaryReport.user.id;
-      document.getElementById('user').value = veterinaryReport.user.firstname + " " + veterinaryReport.user.lastname;
-
-      user = veterinaryReport.user;
 
       // Date et heure actuelles en heure locale
       const now = new Date(veterinaryReport.passageDate);

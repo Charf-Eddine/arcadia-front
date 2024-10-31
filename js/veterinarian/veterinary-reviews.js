@@ -12,7 +12,7 @@ fetchVeterinaryReviews();
 
 // Fonction pour appeler l'API et récupérer la liste des avis
 function fetchVeterinaryReviews() {
-    fetch(`${apiUrl}/veterinary-reviews`, {
+    fetch(`${apiUrl}/veterinary-reviews/find-by-user`, {
         method: 'GET',
         headers: {
         'Authorization': `Bearer ${accessToken}`,
@@ -49,7 +49,6 @@ function renderVeterinaryReviews(page) {
                 <td>${formatDate(veterinaryReview.date)}</td>
                 <td>${veterinaryReview.habitat.name}</td>
                 <td>${veterinaryReview.comment}</td>
-                <td>${veterinaryReview.user.firstname} ${veterinaryReview.user.lastname}</td>
                 <td>
                     <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(${veterinaryReview.id})" data-bs-toggle="modal" data-bs-target="#deleteVeterinaryReviewModal">Supprimer</button>
                 </td>

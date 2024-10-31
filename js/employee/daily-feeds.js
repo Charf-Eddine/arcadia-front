@@ -7,12 +7,28 @@ const accessToken = getToken();
 const role = getRole();
 var userProfile = null;
 
+const titleElement = document.getElementById("title");
+const addReportButton = document.getElementById('addReportButton');
+const actionsHeader = document.getElementById('actionsHeader');
+
+if (role === 'employee') {
+    titleElement.textContent = "Mes nourrissages quotidiens des animaux";
+    addReportButton.style.display = 'block'; // Affiche le bouton
+    actionsHeader.style.display = 'table-cell'; // Affiche la colonne Actions
+} else {
+    titleElement.textContent = "Alimentation quotidienne des animaux";
+    addReportButton.style.display = 'none'; // Cache le bouton
+    actionsHeader.style.display = 'none'; // Cache la colonne Actions
+}
+
+const url = role === 'employee' ? `${apiUrl}/daily-feeds/find-by-user` : `${apiUrl}/daily-feeds`;
+
 // Récupérer la liste des rapports au chargement de la page
 fetchDailyFeeds();
 
 // Fonction pour appeler l'API et récupérer la liste des rapports
 function fetchDailyFeeds() {
-    fetch(`${apiUrl}/daily-feeds`, {
+    fetch(url, {
         method: 'GET',
         headers: {
         'Authorization': `Bearer ${accessToken}`,
@@ -44,6 +60,13 @@ function renderDailyFeeds(page) {
     const paginatedDailyFeeds = dailyFeeds.slice(start, end); // Récupère les rapports de la page courante
 
     paginatedDailyFeeds.forEach(dailyFeed => {
+        const actionsColumn = role === 'employee' ? `
+        <td>
+            <button type="button" class="btn btn-primary btn-sm" onclick="editDailyFeed(${dailyFeed.id})" data-bs-toggle="modal" data-bs-target="#dailyFeedModal">Éditer</button>
+            <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(${dailyFeed.id})" data-bs-toggle="modal" data-bs-target="#deleteDailyFeedModal">Supprimer</button>
+        </td>
+    ` : ``; // Colonne vide si l'utilisateur n'est pas employé
+
         const row = `
             <tr>
                 <td>${formatDate(dailyFeed.passageDate)}</td>
@@ -51,10 +74,7 @@ function renderDailyFeeds(page) {
                 <td>${dailyFeed.food}</td>
                 <td>${dailyFeed.foodWeight}</td>
                 <td>${dailyFeed.user.firstname} ${dailyFeed.user.lastname}</td>
-                <td>
-                    <button type="button" class="btn btn-primary btn-sm" onclick="editDailyFeed(${dailyFeed.id})" data-bs-toggle="modal" data-bs-target="#dailyFeedModal">Éditer</button>
-                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(${dailyFeed.id})" data-bs-toggle="modal" data-bs-target="#deleteDailyFeedModal">Supprimer</button>
-                </td>
+                ${actionsColumn}
             </tr>
         `;
         dailyFeedTableBody.insertAdjacentHTML('beforeend', row);
@@ -101,7 +121,6 @@ async function loadUserProfile() {
 
         userProfile = await response.json();
         document.getElementById('userId').value = userProfile.sub;
-        document.getElementById('user').value = userProfile.user.firstname + " " + userProfile.user.lastname;
     } catch (error) {
         console.error('Erreur lors du chargement du profil de l\'utilisateur:', error);
         throw error;
@@ -171,9 +190,6 @@ async function editDailyFeed(dailyFeedId) {
       document.getElementById('food').value = dailyFeed.food;
       document.getElementById('foodWeight').value = dailyFeed.foodWeight;
       document.getElementById('userId').value = dailyFeed.user.id;
-      document.getElementById('user').value = dailyFeed.user.firstname + " " + dailyFeed.user.lastname;
-
-      user = dailyFeed.user;
 
       // Date et heure actuelles en heure locale
       const now = new Date(dailyFeed.passageDate);
