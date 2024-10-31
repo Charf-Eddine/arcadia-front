@@ -12,7 +12,13 @@ fetchDailyFeeds();
 
 // Fonction pour appeler l'API et récupérer la liste des rapports
 function fetchDailyFeeds() {
-    fetch(`${apiUrl}/daily-feeds`)
+    fetch(`${apiUrl}/daily-feeds`, {
+        method: 'GET',
+        headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json'
+        }
+    })
     .then(response => {
         if(response.ok){
             return response.json();
@@ -104,7 +110,13 @@ async function loadUserProfile() {
 
 async function loadAnimals() {
     try {
-        const response = await fetch(`${apiUrl}/animals`);
+        const response = await fetch(`${apiUrl}/animals`, {
+            method: 'GET',
+            headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+            }
+        });
         const animals = await response.json();
         const animalSelect = document.getElementById('animalId');
         animalSelect.innerHTML = '<option value="" disabled selected>Sélectionner l\'animal</option>';
@@ -145,7 +157,13 @@ function clearModal() {
 
 async function editDailyFeed(dailyFeedId) {
     await loadAnimals();
-    fetch(`${apiUrl}/daily-feeds/${dailyFeedId}`)
+    fetch(`${apiUrl}/daily-feeds/${dailyFeedId}`, {
+        method: 'GET',
+        headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json'
+        }
+    })
     .then(response => response.json())
     .then(dailyFeed => {
       document.getElementById('dailyFeedModalLabel').innerText = "Éditer l\'alimentation quotidienne";
@@ -188,7 +206,10 @@ function saveDailyFeed() {
         // Editer un rapport existant
         fetch(`${apiUrl}/daily-feeds/${currentDailyFeedId}`, {
             method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(dailyFeed)
         }).then(() => {
             fetchDailyFeeds();
@@ -199,7 +220,10 @@ function saveDailyFeed() {
         // Créer un nouveau rapport
         fetch(`${apiUrl}/daily-feeds`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(dailyFeed)
         }).then(() => {
             fetchDailyFeeds();
@@ -215,7 +239,11 @@ function confirmDelete(dailyFeedId) {
 
 function deleteDailyFeed() {
     fetch(`${apiUrl}/daily-feeds/${currentDailyFeedId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+        },
     }).then(() => {
         fetchDailyFeeds();
 

@@ -23,7 +23,13 @@ fetchVeterinaryReports();
 
 // Fonction pour appeler l'API et récupérer la liste des rapports
 function fetchVeterinaryReports() {
-    fetch(`${apiUrl}/veterinary-reports`)
+    fetch(`${apiUrl}/veterinary-reports`, {
+        method: 'GET',
+        headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json'
+        }
+    })
     .then(response => {
         if(response.ok){
             return response.json();
@@ -122,7 +128,13 @@ async function loadUserProfile() {
 
 async function loadAnimals() {
     try {
-        const response = await fetch(`${apiUrl}/animals`);
+        const response = await fetch(`${apiUrl}/animals`, {
+            method: 'GET',
+            headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+            }
+        });
         const animals = await response.json();
         const animalSelect = document.getElementById('animalId');
         animalSelect.innerHTML = '<option value="" disabled selected>Sélectionner l\'animal</option>';
@@ -165,7 +177,13 @@ function clearModal() {
 
 async function editVeterinaryReport(veterinaryReportId) {
     await loadAnimals();
-    fetch(`${apiUrl}/veterinary-reports/${veterinaryReportId}`)
+    fetch(`${apiUrl}/veterinary-reports/${veterinaryReportId}`, {
+        method: 'GET',
+        headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json'
+        }
+    })
     .then(response => response.json())
     .then(veterinaryReport => {
       document.getElementById('veterinaryReportModalLabel').innerText = "Éditer le compte rendu";
@@ -212,7 +230,10 @@ function saveVeterinaryReport() {
         // Editer un rapport existant
         fetch(`${apiUrl}/veterinary-reports/${currentVeterinaryReportId}`, {
             method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(veterinaryReport)
         }).then(() => {
             fetchVeterinaryReports();
@@ -223,7 +244,10 @@ function saveVeterinaryReport() {
         // Créer un nouveau rapport
         fetch(`${apiUrl}/veterinary-reports`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(veterinaryReport)
         }).then(() => {
             fetchVeterinaryReports();
@@ -239,7 +263,11 @@ function confirmDelete(veterinaryReportId) {
 
 function deleteVeterinaryReport() {
     fetch(`${apiUrl}/veterinary-reports/${currentVeterinaryReportId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+        },
     }).then(() => {
         fetchVeterinaryReports();
 

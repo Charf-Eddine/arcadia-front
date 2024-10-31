@@ -1,3 +1,4 @@
+const accessToken = getToken();
 var schedules = []; // Tableau pour stocker tous les horaires
 var currentWeekDay = null;
 
@@ -6,7 +7,13 @@ fetchSchedules();
 
 // Fonction pour appeler l'API et récupérer la liste des horaires
 function fetchSchedules() {
-    fetch(`${apiUrl}/schedules`)
+    fetch(`${apiUrl}/schedules`, {
+        method: 'GET',
+        headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json'
+        }
+    })
     .then(response => {
         if(response.ok){
             return response.json();
@@ -61,7 +68,13 @@ function formatTime(timeString) {
 
 
 function editSchedule(weekDay) {
-    fetch(`${apiUrl}/schedules/${weekDay}`)
+    fetch(`${apiUrl}/schedules/${weekDay}`, {
+        method: 'GET',
+        headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json'
+        }
+    })
     .then(response => response.json())
     .then(schedule => {
       document.getElementById('scheduleModalLabel').innerText = "Éditer les horaires";
@@ -80,7 +93,10 @@ function saveSchedule() {
 
     fetch(`${apiUrl}/schedules/${currentWeekDay}`, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify(schedule)
     }).then(() => {
         fetchSchedules();

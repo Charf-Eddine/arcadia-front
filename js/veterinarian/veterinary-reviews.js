@@ -12,7 +12,13 @@ fetchVeterinaryReviews();
 
 // Fonction pour appeler l'API et récupérer la liste des avis
 function fetchVeterinaryReviews() {
-    fetch(`${apiUrl}/veterinary-reviews`)
+    fetch(`${apiUrl}/veterinary-reviews`, {
+        method: 'GET',
+        headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json'
+        }
+    })
     .then(response => {
         if(response.ok){
             return response.json();
@@ -100,7 +106,13 @@ async function loadUserProfile() {
 
 async function loadHabitats() {
     try {
-        const response = await fetch(`${apiUrl}/habitats`);
+        const response = await fetch(`${apiUrl}/habitats`, {
+            method: 'GET',
+            headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+            }
+        });
         const habitats = await response.json();
         const habitatSelect = document.getElementById('habitatId');
         habitatSelect.innerHTML = '<option value="" disabled selected>Sélectionner l\'habitat</option>';
@@ -134,7 +146,10 @@ function saveVeterinaryReview() {
     // Ajouter un avis
     fetch(`${apiUrl}/veterinary-reviews`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify(veterinaryReview)
     }).then(() => {
         fetchVeterinaryReviews();
@@ -149,7 +164,11 @@ function confirmDelete(veterinaryReviewId) {
 
 function deleteVeterinaryReview() {
     fetch(`${apiUrl}/veterinary-reviews/${currentVeterinaryReviewId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+        },
     }).then(() => {
         fetchVeterinaryReviews();
 

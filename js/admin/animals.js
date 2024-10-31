@@ -1,3 +1,4 @@
+const accessToken = getToken();
 var animalsPerPage = 5; // Nombre des animaux par page
 var currentPage = 1;
 var animals = []; // Tableau pour stocker tous les animaux
@@ -9,7 +10,13 @@ fetchAnimals();
 
 // Fonction pour appeler l'API et récupérer la liste des animaux
 function fetchAnimals() {
-    fetch(`${apiUrl}/animals`)
+    fetch(`${apiUrl}/animals`, {
+        method: 'GET',
+        headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json'
+        }
+    })
     .then(response => {
         if(response.ok){
             return response.json();
@@ -78,7 +85,13 @@ function changePage(page, event) {
 
 async function loadBreeds() {
     try {
-        const response = await fetch(`${apiUrl}/breeds`);
+        const response = await fetch(`${apiUrl}/breeds`, {
+            method: 'GET',
+            headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+            }
+        });
         const breeds = await response.json();
         const breedSelect = document.getElementById('breedId');
         breedSelect.innerHTML = '<option value="" disabled selected>Sélectionner la race</option>';
@@ -96,7 +109,13 @@ async function loadBreeds() {
 
 async function loadHabitats() {
     try {
-        const response = await fetch(`${apiUrl}/habitats`);
+        const response = await fetch(`${apiUrl}/habitats`, {
+            method: 'GET',
+            headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+            }
+        });
         const habitats = await response.json();
         const habitatSelect = document.getElementById('habitatId');
         habitatSelect.innerHTML = '<option value="" disabled selected>Sélectionner l\'habitat</option>';
@@ -175,7 +194,13 @@ function removeImage(index) {
 async function editAnimal(animalId) {
     await loadBreeds();
     await loadHabitats();
-    fetch(`${apiUrl}/animals/${animalId}`)
+    fetch(`${apiUrl}/animals/${animalId}`, {
+        method: 'GET',
+        headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json'
+        }
+    })
     .then(response => response.json())
     .then(async animal => {
         document.getElementById('animalModalLabel').innerText = "Éditer l'animal";
@@ -226,6 +251,10 @@ function saveAnimal() {
 
     fetch(url, {
         method,
+        headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+        },
         body: formData
     }).then(() => {
         fetchAnimals();
@@ -244,7 +273,11 @@ function confirmDelete(animalId) {
 
 function deleteAnimal() {
     fetch(`${apiUrl}/animals/${currentAnimalId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+        },
     }).then(() => {
         fetchAnimals();
 

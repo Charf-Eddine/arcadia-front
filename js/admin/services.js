@@ -1,3 +1,4 @@
+const accessToken = getToken();
 var servicesPerPage = 5; // Nombre de services par page
 var currentPage = 1;
 var services = []; // Tableau pour stocker tous les services
@@ -8,7 +9,13 @@ fetchServices();
 
 // Fonction pour appeler l'API et récupérer la liste des services
 function fetchServices() {
-    fetch(`${apiUrl}/services`)
+    fetch(`${apiUrl}/services`, {
+        method: 'GET',
+        headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json'
+        }
+    })
     .then(response => {
         if(response.ok){
             return response.json();
@@ -80,7 +87,13 @@ function clearModal() {
 }
 
 function editService(serviceId) {
-    fetch(`${apiUrl}/services/${serviceId}`)
+    fetch(`${apiUrl}/services/${serviceId}`, {
+        method: 'GET',
+        headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json'
+        }
+    })
     .then(response => response.json())
     .then(service => {
       document.getElementById('serviceModalLabel').innerText = "Éditer le service";
@@ -100,7 +113,10 @@ function saveService() {
         // Editer un service existant
         fetch(`${apiUrl}/services/${currentServiceId}`, {
             method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(service)
         }).then(() => {
             fetchServices();
@@ -111,7 +127,10 @@ function saveService() {
         // Créer un nouvel utilisateur
         fetch(`${apiUrl}/services`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(service)
         }).then(() => {
             fetchServices();
@@ -127,7 +146,11 @@ function confirmDelete(serviceId) {
 
 function deleteService() {
     fetch(`${apiUrl}/services/${currentServiceId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+        },
     }).then(() => {
         fetchServices();
 

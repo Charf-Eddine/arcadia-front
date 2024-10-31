@@ -1,3 +1,4 @@
+const accessToken = getToken();
 var habitatsPerPage = 5; // Nombre de habitats par page
 var currentPage = 1;
 var habitats = []; // Tableau pour stocker tous les habitats
@@ -9,7 +10,13 @@ fetchHabitats();
 
 // Fonction pour appeler l'API et récupérer la liste des habitats
 function fetchHabitats() {
-    fetch(`${apiUrl}/habitats`)
+    fetch(`${apiUrl}/habitats`, {
+        method: 'GET',
+        headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json'
+        }
+    })
     .then(response => {
         if(response.ok){
             return response.json();
@@ -131,10 +138,16 @@ function removeImage(index) {
 }
 
 async function editHabitat(habitatId) {
-    fetch(`${apiUrl}/habitats/${habitatId}`)
+    fetch(`${apiUrl}/habitats/${habitatId}`, {
+        method: 'GET',
+        headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json'
+        }
+    })
     .then(response => response.json())
     .then(async habitat => {
-        document.getElementById('habitatModalLabel').innerText = "Éditer l'habitat";
+        document.getElementById('habitatModalLabel').innerText = "Éditer le habitat";
         document.getElementById('name').value = habitat.name;
         document.getElementById('description').value = habitat.description;
         currentHabitatId = habitat.id;
@@ -179,6 +192,10 @@ function saveHabitat() {
 
     fetch(url, {
         method,
+        headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+        },
         body: formData
     }).then(() => {
         fetchHabitats();
@@ -197,7 +214,11 @@ function confirmDelete(habitatId) {
 
 function deleteHabitat() {
     fetch(`${apiUrl}/habitats/${currentHabitatId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+        },
     }).then(() => {
         fetchHabitats();
 
