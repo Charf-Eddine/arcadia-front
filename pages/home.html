@@ -1,40 +1,88 @@
-<section>
-    <article>
-        <div class="container p-4">
-            <h1 class="text-center text-primary">Bienvenue à Arcadia</h1>
-<!--            
-            <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img src="/images/1.jpg" class="d-block w-100" alt="Photo zoo N°1">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="/images/2.jpg" class="d-block w-100" alt="Photo zoo N°2">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="/images/3.jpg" class="d-block w-100" alt="Photo zoo N°3">
-                  </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
+<div id="carouselInterval" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="3000">
+      <img src="/images/1.jpg" class="d-block w-100" alt="Photo zoo N°1">
+    </div>
+    <div class="carousel-item" data-bs-interval="3000">
+      <img src="/images/2.jpg" class="d-block w-100" alt="Photo zoo N°2">
+    </div>
+    <div class="carousel-item" data-bs-interval="3000">
+      <img src="/images/3.jpg" class="d-block w-100" alt="Photo zoo N°3">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselInterval" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselInterval" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<div class="p-4">
+    <div id="intro">
+      <h1 class="text-center text-primary">Bienvenue à Arcadia</h1>
+      <p>
+        Situé en plein cœur d'un cadre naturel exceptionnel, notre zoo offre une expérience unique pour petits et grands. Avec plus de 200 espèces d'animaux provenant des cinq continents, chaque visite est une véritable aventure à la découverte de la diversité du règne animal. Des majestueux félins aux fascinants reptiles, en passant par les oiseaux aux couleurs chatoyantes, notre parc abrite une grande variété d'espèces rares et menacées.
+      <p>
+      </p>
+        Nos parcours immersifs, aménagés avec soin, permettent aux visiteurs de s'approcher au plus près des animaux dans des habitats recréés pour leur confort. Vous pourrez explorer la savane africaine, les forêts tropicales d'Asie, ou encore les paysages désertiques d'Australie, tout en découvrant des informations captivantes sur chaque espèce grâce aux panneaux interactifs et aux activités pédagogiques proposées tout au long de la visite.
+      </p>
+    </div>
+    <div id="habitats" class="pb-4">
+      <h3 class="text-primary">Les habitats</h3>
+      <div class="row row-cols-1 row-cols-md-3 g-4" id="habitat-container">
+        <!-- Les cartes des habitats seront injectées ici dynamiquement -->
+      </div>
+    </div>
+    <div id="services" class="pb-4">
+      <h3 class="text-primary">Nos services</h3>
+      <div class="accordion" id="servicesAccordion">
+      </div>
+    </div>
+    <div id="animals" class="pb-4">
+      <h3 class="text-primary">Les animaux</h3>
+      <div class="row row-cols-1 row-cols-md-3 g-4" id="animal-container">
+        <!-- Les cartes des animaux seront injectées ici dynamiquement -->
+      </div>
+    </div>
+    <div id="visitor-reviews">
+      <h3 class="text-primary">Les avis des visiteurs</h3>
+      <div class="row row-cols-1 row-cols-md-3 g-4" id="visitor-review-container">
+        <!-- Les cartes des avis seront injectées ici dynamiquement -->
+      </div>
+      <div class="text-center">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#visitorReviewModal">Laisser un avis</button>
+      </div>
+    </div>    
+</div>
+
+
+  <!-- Modale pour laisser un avis -->
+  <div class="modal fade" id="visitorReviewModal" tabindex="-1" aria-labelledby="visitorReviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="visitorReviewModalLabel">Laisser un avis</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
--->
-            <div class="row row-cols-2">
-                <div class="col">
-                    <p>
-                        Situé en plein cœur d'un cadre naturel exceptionnel, notre zoo offre une expérience unique pour petits et grands. Avec plus de 200 espèces d'animaux provenant des cinq continents, chaque visite est une véritable aventure à la découverte de la diversité du règne animal. Des majestueux félins aux fascinants reptiles, en passant par les oiseaux aux couleurs chatoyantes, notre parc abrite une grande variété d'espèces rares et menacées.
-                    </p>
-                </div>
-                <div class="col">
-                    <img class="w-100 rounded" src="../images/zoo.jpg" alt=""/>
-                </div>
+            <div class="modal-body">
+                <form id="visitorReviewForm">
+                    <div class="mb-3">
+                        <label for="pseudo" class="form-label">Pseudo</label>
+                        <input type="text" class="form-control" id="pseudo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="comment" class="form-label">Commentaire</label>
+                        <textarea class="form-control" id="comment" rows="3" required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+              <button type="button" class="btn btn-primary" onclick="saveVisitorReview()">Envoyer</button>
             </div>
         </div>
-    </article>
-</section>
+    </div>
+</div>

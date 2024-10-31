@@ -2,7 +2,7 @@ import Route from "./Route.js";
 
 //Définir ici vos routes
 export const allRoutes = [
-    new Route("/", "Accueil", "/pages/home.html", []),
+    new Route("/", "Accueil", "/pages/home.html", [],"/js/home.js"),
     new Route("/services", "Services", "/pages/services.html", [],"/js/services.js"),
     new Route("/signin", "Connexion", "/pages/signin.html", ["disconnected"],"/js/auth/signin.js"),
     new Route("/contact-us", "Contactez-nous", "/pages/contact-us.html", [],"/js/contact-us.js"),
@@ -15,6 +15,7 @@ export const allRoutes = [
     new Route("/daily-feed-management", "Alimentation quotidienne des animaux", "/pages/employee/daily-feeds.html", [],"/js/employee/daily-feeds.js"),
     new Route("/veterinary-report-management", "Comptes rendus des animaux", "/pages/veterinarian/veterinary-reports.html", [],"/js/veterinarian/veterinary-reports.js"),
     new Route("/veterinary-review-management", "Les avis sur les habitats", "/pages/veterinarian/veterinary-reviews.html", [],"/js/veterinarian/veterinary-reviews.js"),
+    new Route("/visitor-review-management", "Gestion des avis visiteurs", "/pages/employee/visitor-reviews.html", [],"/js/employee/visitor-reviews.js"),
 ];
 
 //Le titre s'affiche comme ceci : Route.titre - websitename
