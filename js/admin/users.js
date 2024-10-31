@@ -1,3 +1,4 @@
+const accessToken = getToken();
 var usersPerPage = 5; // Nombre d'utilisateurs par page
 var currentPage = 1;
 var users = []; // Tableau pour stocker tous les utilisateurs
@@ -8,7 +9,13 @@ fetchUsers();
 
 // Fonction pour appeler l'API et récupérer la liste des utilisateurs
 function fetchUsers() {
-    fetch(`${apiUrl}/users`)
+    fetch(`${apiUrl}/users`, {
+        method: 'GET',
+        headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json'
+        }
+    })
     .then(response => {
         if(response.ok){
             return response.json();
@@ -102,7 +109,13 @@ function clearModal() {
 }
 
 function editUser(userId) {
-    fetch(`${apiUrl}/users/${userId}`)
+    fetch(`${apiUrl}/users/${userId}`, {
+        method: 'GET',
+        headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json'
+        }
+    })
     .then(response => response.json())
     .then(user => {
       document.getElementById('userModalLabel').innerText = "Éditer l'utilisateur";
@@ -128,7 +141,10 @@ function saveUser() {
         // Editer un utilisateur existant
         fetch(`${apiUrl}/users/${currentUserId}`, {
             method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(user)
         }).then(() => {
             fetchUsers();
@@ -139,12 +155,41 @@ function saveUser() {
         // Créer un nouvel utilisateur
         fetch(`${apiUrl}/users`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(user)
-        }).then(() => {
+        })
+        .then(response => {
+            if(response.ok){
+                return response.json();
+            }
+            else{
+                alert("Erreur de création du nouvel utilisateur");
+            }
+            return response.json();
+        })     
+        .then(data => {
             fetchUsers();
             document.getElementById('userForm').reset();
             document.querySelector('[data-bs-dismiss="modal"]').click();
+
+            //Envoi de l'e-mail de notification de création de compte au nouvel utilisateur
+            const userId = data;
+            fetch(`${apiUrl}/mailing/send-account-creation-mail`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ userId: userId })
+            })
+            .then(mailResponse => {
+                if (!mailResponse.ok) {
+                    throw new Error("Erreur d'envoi de l'e-mail");
+                }
+            })
         });
     }
 }
@@ -155,7 +200,11 @@ function confirmDelete(userId) {
 
 function deleteUser() {
     fetch(`${apiUrl}/users/${currentUserId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+        },
     }).then(() => {
         fetchUsers();
 
