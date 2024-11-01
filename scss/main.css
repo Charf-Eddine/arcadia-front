@@ -12010,10 +12010,11 @@ label .bi {
   padding-right: 8px;
 }
 
+/*
 .bi::before {
   color: var(--bs-primary);
 }
-
+*/
 .login-form {
   max-width: 500px;
   width: 100%;

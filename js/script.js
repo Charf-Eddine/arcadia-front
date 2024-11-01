@@ -92,3 +92,36 @@ function showAndHideElementsForRoles() {
         }
     })
 }
+
+// Fonction pour afficher le nom et prénom de l'utilisateur
+async function displayUserInfo() {
+    try {
+        const accessToken = await getToken();
+        const response = await fetch(`${apiUrl}/auth/profile`, {
+            method: 'GET',
+            headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        userProfile = await response.json();
+
+        if (userProfile) {
+            const userInfo = document.getElementById('userInfo');
+            const userName = document.getElementById('userName');
+            userName.textContent = `${userProfile.user.firstname} ${userProfile.user.lastname}`;
+            userInfo.style.display = 'block';  
+        }
+    } catch (error) {
+        console.error('Erreur lors du chargement du profil de l\'utilisateur:', error);
+        throw error;
+    }
+}
+
+// Appeler la fonction pour afficher les infos de l'utilisateur
+displayUserInfo();
