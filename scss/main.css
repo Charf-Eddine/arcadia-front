@@ -12051,4 +12051,13 @@ label .bi {
 }
 .review-card .review-comment {
   margin-top: 10px;
+}
+
+.navbar-brand {
+  font-size: 44px;
+  font-family: "Kaushan Script", cursive;
+}
+
+.navbar-nav .nav-link {
+  font-size: 18px;
 }/*# sourceMappingURL=main.css.map */
