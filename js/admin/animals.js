@@ -252,8 +252,7 @@ function saveAnimal() {
     fetch(url, {
         method,
         headers: {
-            'Authorization': `Bearer ${accessToken}`,
-            'Content-Type': 'application/json'
+            'Authorization': `Bearer ${accessToken}`
         },
         body: formData
     }).then(() => {

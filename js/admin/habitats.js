@@ -147,7 +147,7 @@ async function editHabitat(habitatId) {
     })
     .then(response => response.json())
     .then(async habitat => {
-        document.getElementById('habitatModalLabel').innerText = "Éditer le habitat";
+        document.getElementById('habitatModalLabel').innerText = "Éditer l'habitat";
         document.getElementById('name').value = habitat.name;
         document.getElementById('description').value = habitat.description;
         currentHabitatId = habitat.id;
@@ -193,8 +193,7 @@ function saveHabitat() {
     fetch(url, {
         method,
         headers: {
-            'Authorization': `Bearer ${accessToken}`,
-            'Content-Type': 'application/json'
+            'Authorization': `Bearer ${accessToken}`
         },
         body: formData
     }).then(() => {
