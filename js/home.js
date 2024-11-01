@@ -161,7 +161,10 @@ function displayVisitorReviews(visitorReviews) {
         reviewCard.className = 'col-md-4';
         reviewCard.innerHTML = `
             <div class="review-card">
-                <div class="review-username">${review.pseudo}</div>
+                <div class="review-pseudo">
+                    <i class="bi bi-person-circle"></i>
+                    ${review.pseudo}
+                </div>
                 <div class="review-date">${formatDate(review.date)}</div>
                 <div class="review-comment">${review.comment}</div>
             </div>
