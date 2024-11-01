@@ -29,11 +29,12 @@ function displayServices(services) {
         const accordionItem = `
         <div class="accordion-item">
           <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse${index}" aria-expanded="false" aria-controls="panelsStayOpen-collapse${index}">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse${index}" aria-expanded="true" aria-controls="panelsStayOpen-collapse${index}">
+                <i class="bi bi-info-circle me-2"></i>
                 ${service.name}
             </button>
           </h2>
-          <div id="panelsStayOpen-collapse${index}" class="accordion-collapse collapse">
+          <div id="panelsStayOpen-collapse${index}" class="accordion-collapse collapse show">
             <div class="accordion-body">
                 ${service.description}
             </div>
