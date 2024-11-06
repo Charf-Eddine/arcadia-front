@@ -123,7 +123,6 @@ function editUser(userId) {
       document.getElementById('lastname').value = user.lastname;
       document.getElementById('email').value = user.email;
       document.getElementById('role').value = user.role;
-      document.getElementById('password').value = user.password;
       currentUserId = user.id;
     });
 }
@@ -135,7 +134,11 @@ function saveUser() {
     const role = document.getElementById('role').value;
     const password = document.getElementById('password').value;
 
-    const user = { firstname, lastname, email, role, password };
+    const user = { firstname, lastname, email, role };
+
+    if (password) {
+      user.password = password;
+    }
 
     if (currentUserId) {
         // Editer un utilisateur existant
