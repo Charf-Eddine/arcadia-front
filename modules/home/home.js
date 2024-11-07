@@ -206,3 +206,18 @@ function saveVisitorReview() {
     });
 }
 /*======================================================================================================================*/
+
+function scrollToHash() {
+    if (window.location.hash) {
+        const targetElement = document.querySelector(window.location.hash);
+        if (targetElement) {
+        targetElement.scrollIntoView({ behavior: "smooth" });
+        }
+    }
+}
+
+// Exécute immédiatement après le chargement
+scrollToHash();
+
+// Réessaie après un léger délai si le premier essai échoue
+setTimeout(scrollToHash, 100);
