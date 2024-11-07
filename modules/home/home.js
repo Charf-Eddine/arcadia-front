@@ -148,6 +148,10 @@ function displayAnimals(animals) {
 /*======================================================================================================================*/
 
 /*================================================== Avis des visiteurs ================================================*/
+let currentPage = 1;
+const resultsPerPage = 6;
+let visitorReviews = [];
+
 // Fonction pour appeler l'API et récupérer la liste des avis
 fetch(apiUrl + "/visitor-reviews/list/accepted")
 .then(response => {
@@ -159,15 +163,28 @@ fetch(apiUrl + "/visitor-reviews/list/accepted")
     }
 })
 .then(data => {
-    displayVisitorReviews(data);
+    visitorReviews = data;
+    if (visitorReviews && visitorReviews.length > 0) {
+        displayVisitorReviews();        
+    }
+    else {
+        document.getElementById('visitor-reviews').classList.add('d-none');
+    }
 })
 .catch(error => console.error('Erreur lors de la récupération des avis :', error));
 
 // Fonction pour afficher les avis
-function displayVisitorReviews(visitorReviews) {
-    const visitorReviewscontainer = document.getElementById('visitor-review-container');
+function displayVisitorReviews() {
+    const visitorReviewsContainer = document.getElementById('visitor-reviews-container');
 
-    visitorReviews.forEach(review => {
+    visitorReviewsContainer.innerHTML = '';
+    const totalPages = Math.ceil(visitorReviews.length / resultsPerPage);
+
+    const start = (currentPage - 1) * resultsPerPage;
+    const end = start + resultsPerPage;
+    const reviewsToDisplay = visitorReviews.slice(start, end);    
+
+    reviewsToDisplay.forEach(review => {
         const reviewCard = document.createElement('div');
         reviewCard.className = 'col-md-4';
         reviewCard.innerHTML = `
@@ -180,8 +197,31 @@ function displayVisitorReviews(visitorReviews) {
                 <div class="review-comment">${review.comment}</div>
             </div>
         `;
-        visitorReviewscontainer.appendChild(reviewCard);
+        visitorReviewsContainer.appendChild(reviewCard);
     });
+
+    updatePagination(totalPages);
+}
+
+function updatePagination(totalPages) {
+    const paginationContainer = document.getElementById('pagination-container');
+    paginationContainer.innerHTML = ''; 
+
+    for (let i = 1; i <= totalPages; i++) {
+        const pageButton = document.createElement('button');
+        pageButton.className = 'btn btn-secondary mx-1';
+        pageButton.textContent = i;
+        pageButton.onclick = () => {
+            currentPage = i;
+            displayVisitorReviews(visitorReviews);
+        };
+
+        if (i === currentPage) {
+            pageButton.classList.add('active');
+        }
+
+        paginationContainer.appendChild(pageButton);
+    }
 }
 
 function formatDate(isoDate) {
