@@ -62,37 +62,53 @@ fetch(apiUrl + "/habitats")
 })
 .catch(error => console.error('Erreur lors de la récupération des habitats :', error));
 
-// Fonction pour afficher les habitats dans le composant Grid cards de Bootstrap
+// Fonction pour afficher les habitats dans le carousel de Bootstrap
 function displayHabitats(habitats) {
     const habitatsContainer = document.getElementById('habitat-container');
-
-    // Vider le contenu actuel du conteneur
     habitatsContainer.innerHTML = '';
-    
-    // Parcourir chaque habitat et créer une carte Bootstrap
-    habitats.forEach(habitat => {
-        const card = document.createElement('div');
-        card.classList.add('col');
-    
-        // Sélectionne la première image de l'habitat ou une image par défaut si non disponible
-        const imageUrl = habitat.images.length > 0 ? `${apiUrl}/uploads/${habitat.images[0].filename}` : 'default.jpg';
-    
-        card.innerHTML = `
-        <div class="card h-100">
-            <img src="${imageUrl}" class="card-img-top" alt="${habitat.name}">
-            <div class="card-body">
-            <h5 class="card-title">${habitat.name}</h5>
-            <p class="card-text">${habitat.description}</p>
-            </div>
-        </div>
-        `;
 
-        // Ajoute un écouteur d'événements pour rediriger la page détail lors du clic
-        card.addEventListener('click', () => {
-            window.location.href = `/habitat/${habitat.id}`;
+    // Séparer les cartes en groupes de 4 pour chaque "slide"
+    const slides = [];
+    for (let i = 0; i < habitats.length; i += 4) {
+        const slideGroup = habitats.slice(i, i + 4);
+        slides.push(slideGroup);
+    }
+
+    // Ajouter chaque groupe de cartes comme une "slide" dans le carousel
+    slides.forEach((slideGroup, index) => {
+        const slide = document.createElement('div');
+        slide.classList.add('carousel-item');
+        if (index === 0) slide.classList.add('active'); // Première slide active par défaut
+
+        const row = document.createElement('div');
+        row.classList.add('row', 'row-cols-1', 'row-cols-md-4', 'g-4', 'grid-cards');
+
+        slideGroup.forEach(habitat => {
+            const card = document.createElement('div');
+            card.classList.add('col');
+
+            const imageUrl = habitat.images.length > 0 ? `${apiUrl}/uploads/${habitat.images[0].filename}` : 'default.jpg';
+
+            card.innerHTML = `
+            <div class="card h-100">
+                <img src="${imageUrl}" class="card-img-top" alt="${habitat.name}">
+                <div class="card-body">
+                <h5 class="card-title">${habitat.name}</h5>
+                <p class="card-text">${habitat.description}</p>
+                </div>
+            </div>            
+            `;
+
+            // Redirection vers la page de détail lors du clic
+            card.addEventListener('click', () => {
+                window.location.href = `/habitat/${habitat.id}`;
+            });
+
+            row.appendChild(card);
         });
-    
-        habitatsContainer.appendChild(card);
+
+        slide.appendChild(row);
+        habitatsContainer.appendChild(slide);
     });
 }
 /*======================================================================================================================*/
@@ -113,36 +129,52 @@ fetch(apiUrl + "/animals")
 })
 .catch(error => console.error('Erreur lors de la récupération des animaux :', error));
 
-// Fonction pour afficher les animaux dans le composant Grid cards de Bootstrap
+// Fonction pour afficher les animaux dans le carousel de Bootstrap
 function displayAnimals(animals) {
     const animalsContainer = document.getElementById('animal-container');
-
-    // Vider le contenu actuel du conteneur
     animalsContainer.innerHTML = '';
-    
-    // Parcourir chaque animal et créer une carte Bootstrap
-    animals.forEach(animal => {
-        const card = document.createElement('div');
-        card.classList.add('col');
-    
-        // Sélectionne la première image de l'animal ou une image par défaut si non disponible
-        const imageUrl = animal.images.length > 0 ? `${apiUrl}/uploads/${animal.images[0].filename}` : 'default.jpg';
-    
-        card.innerHTML = `
-        <div class="card h-100">
-            <img src="${imageUrl}" class="card-img-top" alt="${animal.name}">
-            <div class="card-body">
-            <h5 class="card-title">${animal.name}</h5>
+
+    // Séparer les cartes en groupes de 4 pour chaque "slide"
+    const slides = [];
+    for (let i = 0; i < animals.length; i += 4) {
+        const slideGroup = animals.slice(i, i + 4);
+        slides.push(slideGroup);
+    }
+
+    // Ajouter chaque groupe de cartes comme une "slide" dans le carousel
+    slides.forEach((slideGroup, index) => {
+        const slide = document.createElement('div');
+        slide.classList.add('carousel-item');
+        if (index === 0) slide.classList.add('active'); // Première slide active par défaut
+
+        const row = document.createElement('div');
+        row.classList.add('row', 'row-cols-1', 'row-cols-md-4', 'g-4', 'grid-cards');
+
+        slideGroup.forEach(animal => {
+            const card = document.createElement('div');
+            card.classList.add('col');
+
+            const imageUrl = animal.images.length > 0 ? `${apiUrl}/uploads/${animal.images[0].filename}` : 'default.jpg';
+
+            card.innerHTML = `
+            <div class="card h-100">
+                <img src="${imageUrl}" class="card-img-top" alt="${animal.name}">
+                <div class="card-body">
+                    <h5 class="card-title">${animal.name}</h5>
+                </div>
             </div>
-        </div>
-        `;
-    
-        // Ajoute un écouteur d'événements pour rediriger la page détail lors du clic
-        card.addEventListener('click', () => {
-            window.location.href = `/animal/${animal.id}`;
+            `;
+
+            // Redirection vers la page de détail lors du clic
+            card.addEventListener('click', () => {
+                window.location.href = `/animal/${animal.id}`;
+            });
+
+            row.appendChild(card);
         });
 
-        animalsContainer.appendChild(card);
+        slide.appendChild(row);
+        animalsContainer.appendChild(slide);
     });
 }
 /*======================================================================================================================*/

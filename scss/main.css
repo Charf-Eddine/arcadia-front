@@ -12021,7 +12021,7 @@ label .bi {
 }
 
 /* Fixer la hauteur des images des slides*/
-.carousel-inner img {
+.default-carousel .carousel-inner img {
   height: 500px;
   -o-object-fit: cover;
      object-fit: cover;
@@ -12078,4 +12078,19 @@ label .bi {
   width: 100%;
   height: auto;
   margin-bottom: 15px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  top: 50%; /* Centrer verticalement */
+  transform: translateY(-50%);
+  width: 5%;
+}
+
+.carousel-control-prev {
+  left: -1%; /* Positionner à l'extrême gauche */
+}
+
+.carousel-control-next {
+  right: -1%; /* Positionner à l'extrême droite */
 }/*# sourceMappingURL=main.css.map */

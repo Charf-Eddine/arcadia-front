@@ -1,4 +1,4 @@
-<div id="carouselInterval" class="carousel slide" data-bs-ride="carousel">
+<div id="carouselInterval" class="default-carousel carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active" data-bs-interval="3000">
       <img src="/images/1.jpg" class="d-block w-100" alt="Photo zoo N°1">
@@ -32,8 +32,18 @@
     </div>
     <div id="habitats" class="pb-4">
       <h3 class="text-primary">Les habitats</h3>
-      <div class="row row-cols-1 row-cols-md-4 g-4 grid-cards" id="habitat-container">
-        <!-- Les cartes des habitats seront injectées ici dynamiquement -->
+      <div id="habitatCarousel" class="carousel slide">
+        <div class="carousel-inner" id="habitat-container">
+          <!-- Les cartes des habitats seront injectés ici dynamiquement -->
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#habitatCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Précédent</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#habitatCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Suivant</span>
+        </button>
       </div>
     </div>
     <div id="services" class="pb-4">
@@ -43,8 +53,18 @@
     </div>
     <div id="animals" class="pb-4">
       <h3 class="text-primary">Les animaux</h3>
-      <div class="row row-cols-1 row-cols-md-4 g-4 grid-cards" id="animal-container">
-        <!-- Les cartes des animaux seront injectées ici dynamiquement -->
+      <div id="animalCarousel" class="carousel slide">
+        <div class="carousel-inner" id="animal-container">
+          <!-- Les cartes des animaux seront injectées ici dynamiquement -->
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#animalCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Précédent</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#animalCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Suivant</span>
+        </button>
       </div>
     </div>
     <div id="visitor-reviews">
