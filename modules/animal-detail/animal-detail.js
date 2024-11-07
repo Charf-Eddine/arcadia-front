@@ -48,5 +48,22 @@ export function initPage({ id }) {
         else {
             document.getElementById('veterinary-report').classList.add('d-none');
         }
+
+        // Incrémenter le nombre de consultations de l'animal pour les statistiques
+        fetch(`${apiUrl}/statistics/${encodeURIComponent(animal.name)}/increment-consultation`, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+            throw new Error('Erreur lors de l\'incrémentation de la consultation de l\'animal');
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+        });        
     }
 }

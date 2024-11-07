@@ -17,6 +17,7 @@ export const allRoutes = [
     new Route("/visitor-review-management", "Gestion des avis visiteurs", "/modules/visitor-review-management/visitor-reviews.html", [],"/modules/visitor-review-management/visitor-reviews.js"),
     new Route("/habitat/:id", "Détail de l'habitat", "/modules/habitat-detail/habitat-detail.html", [],"/modules/habitat-detail/habitat-detail.js"),
     new Route("/animal/:id", "Détail de l'animal", "/modules/animal-detail/animal-detail.html", [], "/modules/animal-detail/animal-detail.js"),
+    new Route("/dashboard", "Tableau de bord", "/modules/dashboard/dashboard.html", [], "/modules/dashboard/dashboard.js"),
 ];
 
 //Le titre s'affiche comme ceci : Route.titre - websitename
