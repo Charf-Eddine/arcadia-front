@@ -1,5 +1,6 @@
 import Route from "./Route.js";
 import { allRoutes, websiteName } from "./allRoutes.js";
+import { initDetail } from '../js/init-detail.js';
 
 // Création d'une route pour la page 404 (page introuvable)
 const route404 = new Route("404", "Page introuvable", "/pages/404.html", []);
@@ -7,25 +8,30 @@ const route404 = new Route("404", "Page introuvable", "/pages/404.html", []);
 // Fonction pour récupérer la route correspondant à une URL donnée
 const getRouteByUrl = (url) => {
   let currentRoute = null;
-  // Parcours de toutes les routes pour trouver la correspondance
-  allRoutes.forEach((element) => {
-    if (element.url == url) {
-      currentRoute = element;
+  let routeParams = {};
+
+  allRoutes.forEach((route) => {
+    const routePattern = route.url.replace(/:([^/]+)/g, "([^/]+)"); // Convertit :id en une expression régulière
+    const regex = new RegExp(`^${routePattern}$`);
+    const match = url.match(regex);
+
+    if (match) {
+      currentRoute = route;
+      const paramNames = [...route.url.matchAll(/:([^/]+)/g)].map((m) => m[1]);
+      paramNames.forEach((paramName, index) => {
+        routeParams[paramName] = match[index + 1]; // Récupère l'ID
+      });
     }
   });
-  // Si aucune correspondance n'est trouvée, on retourne la route 404
-  if (currentRoute != null) {
-    return currentRoute;
-  } else {
-    return route404;
-  }
+
+  return { route: currentRoute || route404, params: routeParams };
 };
 
 // Fonction pour charger le contenu de la page
 const LoadContentPage = async () => {
   const path = window.location.pathname;
   // Récupération de l'URL actuelle
-  const actualRoute = getRouteByUrl(path);
+  const { route: actualRoute, params } = getRouteByUrl(path);
 
   //Vérifier les droits d'accès à la page
   const allRolesArray = actualRoute.authorize;
@@ -55,10 +61,13 @@ const LoadContentPage = async () => {
     let scriptTag = document.createElement("script");
     scriptTag.setAttribute("type", "text/javascript");
     scriptTag.setAttribute("src", actualRoute.pathJS);
-
     // Ajout de la balise script au corps du document
     document.querySelector("body").appendChild(scriptTag);
   }
+
+  // Appel à initDetail avec le type et les paramètres
+  const type = actualRoute.url.split('/')[1]; // Exemple : 'animal' à partir de '/animal/:id'
+  await initDetail({ type, ...params });
 
   // Changement du titre de la page
   document.title = actualRoute.title + " - " + websiteName;

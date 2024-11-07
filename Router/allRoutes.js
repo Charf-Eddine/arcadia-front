@@ -15,6 +15,8 @@ export const allRoutes = [
     new Route("/veterinary-report-management", "Comptes rendus des animaux", "/modules/veterinary-report-management/veterinary-reports.html", [],"/modules/veterinary-report-management/veterinary-reports.js"),
     new Route("/veterinary-review-management", "Les avis sur les habitats", "/modules/veterinary-review-management/veterinary-reviews.html", [],"/modules/veterinary-review-management/veterinary-reviews.js"),
     new Route("/visitor-review-management", "Gestion des avis visiteurs", "/modules/visitor-review-management/visitor-reviews.html", [],"/modules/visitor-review-management/visitor-reviews.js"),
+    new Route("/habitat/:id", "Détail de l'habitat", "/modules/habitat-detail/habitat-detail.html", [],"/modules/habitat-detail/habitat-detail.js"),
+    new Route("/animal/:id", "Détail de l'animal", "/modules/animal-detail/animal-detail.html", [], "/modules/animal-detail/animal-detail.js"),
 ];
 
 //Le titre s'affiche comme ceci : Route.titre - websitename
