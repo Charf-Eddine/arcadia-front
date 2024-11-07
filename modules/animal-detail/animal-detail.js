@@ -19,7 +19,15 @@ export function initPage({ id }) {
     function displayAnimal(animal) {
         document.getElementById("name").textContent = animal.name;
         document.getElementById("breed").textContent = animal.breed.name;
-        document.getElementById("habitat").textContent = animal.habitat.name;
+        const habitatElement = document.getElementById("habitat");
+
+        // Création de l'élément <a>
+        const link = document.createElement("a");
+        link.href = `/habitat/${animal.habitat.id}`;
+        link.textContent = animal.habitat.name;
+
+        // Ajout du lien dans l'élément "habitat"
+        habitatElement.appendChild(link);
 
         if (animal.images && animal.images.length > 0) {
             const carouselImagesContainer = document.getElementById('carousel-images');
