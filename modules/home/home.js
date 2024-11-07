@@ -86,6 +86,11 @@ function displayHabitats(habitats) {
             </div>
         </div>
         `;
+
+        // Ajoute un écouteur d'événements pour rediriger la page détail lors du clic
+        card.addEventListener('click', () => {
+            window.location.href = `/habitat/${habitat.id}`;
+        });
     
         habitatsContainer.appendChild(card);
     });
@@ -132,6 +137,11 @@ function displayAnimals(animals) {
         </div>
         `;
     
+        // Ajoute un écouteur d'événements pour rediriger la page détail lors du clic
+        card.addEventListener('click', () => {
+            window.location.href = `/animal/${animal.id}`;
+        });
+
         animalsContainer.appendChild(card);
     });
 }

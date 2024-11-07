@@ -64,7 +64,7 @@ label .bi {
 
 /* Fixer la hauteur des images des cartes*/
 .card-img-top {
-  height: 300px; 
+  height: 250px; 
   object-fit: cover;
 }
 
@@ -97,4 +97,26 @@ label .bi {
 
 .navbar-nav .nav-link {
   font-size: 18px;
+}
+
+.grid-cards {
+  .card {
+    cursor: pointer; /* Change le curseur pour indiquer que c'est cliquable */
+    transition: transform 0.2s; /* Transition douce pour l'effet de zoom */
+  }
+  
+  .card:hover {
+    transform: scale(1.05); /* Zoom léger au survol */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre au survol */
+  }
+  
+  .card:active {
+    transform: scale(0.98); /* Réduire légèrement la carte lors du clic */
+  }
+}
+
+.animal-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 15px;
 }
