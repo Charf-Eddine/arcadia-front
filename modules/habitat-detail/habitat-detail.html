@@ -1,35 +1,33 @@
-<div class="container p-4"></div>
-    <h1 id="name" class="text-center"></h1>
-    <!-- Carousel pour les images de l'habitat -->
-    <div id="habitatCarousel" class="carousel slide" data-ride="carousel">
-      <div class="carousel-inner" id="carousel-images">
-      </div>
-      <a class="carousel-control-prev" type="button" data-bs-target="#habitatCarousel" data-bs-slide="prev" id="carousel-prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Précédent</span>
-      </a>
-      <a class="carousel-control-next" type="button" data-bs-target="#habitatCarousel" data-bs-slide="next" id="carousel-next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Suivant</span>
-      </a>
+<div class="container p-4">
+  <h1 id="name" class="text-center"></h1>
+  <!-- Carousel pour les images de l'habitat -->
+  <div id="habitatCarousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner" id="carousel-images">
     </div>
-    <p id="description" class="mt-3"></p>
-    <div id="animals">
-      <h3 class="text-primary">Les animaux de l'habitat</h3>
-      <div class="row row-cols-1 row-cols-md-4 g-4 grid-cards" id="animal-container">
-        <!-- Les cartes des animaux seront injectées ici dynamiquement -->
-      </div>
+    <a class="carousel-control-prev" type="button" data-bs-target="#habitatCarousel" data-bs-slide="prev" id="carousel-prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </a>
+    <a class="carousel-control-next" type="button" data-bs-target="#habitatCarousel" data-bs-slide="next" id="carousel-next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </a>
+  </div>
+  <p id="description" class="mt-3"></p>
+  <div id="animals">
+    <h3 class="text-primary">Les animaux de l'habitat</h3>
+    <div class="row row-cols-1 row-cols-md-4 g-4 grid-cards" id="animal-container">
+      <!-- Les cartes des animaux seront injectées ici dynamiquement -->
     </div>
-    <!-- Section pour l'avis du vétérinaire -->
-    <div class="card mt-4">
-      <div class="card-header bg-primary text-white">
-          <h5 class="mb-0">
-            <i class="bi bi-info-circle-fill"></i>
-            Avis du vétérinaire
-          </h5>
-      </div>
-      <div class="card-body">
-          <p class="card-text" id="veterinary-comment"></p>
-      </div>
-  </div>   
+  </div>
+  <!-- Section pour l'avis du vétérinaire -->
+  <div class="card mt-4">
+    <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">
+          <i class="bi bi-info-circle-fill"></i>
+          Avis du vétérinaire
+        </h5>
+    </div>
+    <div class="card-body">
+        <p class="card-text" id="veterinary-comment"></p>
+    </div>
+</div>   
 </div>
