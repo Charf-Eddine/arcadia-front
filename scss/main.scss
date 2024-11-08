@@ -6,15 +6,24 @@ html {
     min-height: 100%;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 main {
     background-color: #E1E3E1;
+    flex-grow: 1;
 }
 
 footer.footer {
     padding: 15px;
-//    position: absolute;
-//    bottom: 0;
     width: 100%;
+}
+
+footer {
+  margin-top: auto;  /* Pour pousser le footer vers le bas */
 }
 
 p {
