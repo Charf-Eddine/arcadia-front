@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/scss/main.css">
+    <title>Arcadia</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="primary">
+            <div class="container-fluid">
+              <a class="navbar-brand text-light" href="/">Zoo Arcadia</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link text-light" href="/">Accueil</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-light" href="/#services">Les services</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-light" href="/#habitats">Les habitats</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-light" href="/schedules">Les horaires</a>
+                  </li>                  
+                  <li class="nav-item">
+                    <a class="nav-link text-light" href="/contact-us">Contactez-nous</a>
+                  </li>
+                  <li class="nav-item dropdown" data-show="veterinarian">
+                    <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Espace vétérinaire
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="/veterinary-report-management">Mes comptes rendus<br>des animaux</a></li>
+                      <li><a class="dropdown-item" href="/veterinary-review-management">Mes avis sur les habitats</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="/daily-feed-management">Alimentation quotidienne<br>des animaux</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item dropdown" data-show="employee">
+                    <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Espace employé
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="/daily-feed-management">Mes nourrissages quotidiens<br>des animaux</a></li>
+                      <li><a class="dropdown-item" href="/service-management">Gestion des services</a></li>
+                      <li><a class="dropdown-item" href="/visitor-review-management">Gestion des avis visiteurs</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item dropdown" data-show="admin">
+                    <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Administration
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="/user-management">Gestion des utilisateurs</a></li>
+                      <li><a class="dropdown-item" href="/service-management">Gestion des services</a></li>
+                      <li><a class="dropdown-item" href="/habitat-management">Gestion des habitats</a></li>
+                      <li><a class="dropdown-item" href="/animal-management">Gestion des animaux</a></li>
+                      <li><a class="dropdown-item" href="/schedule-management">Gestion des horaires</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="/veterinary-report-management">Comptes rendus<br>des vétérinaires</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="/dashboard">Tableau de board</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item" data-show="disconnected">
+                    <a class="nav-link text-light" href="/signin">Connexion</a>
+                  </li>
+                  <li class="nav-item" data-show="connected">
+                    <button class="nav-link text-light" id="signoutButton">Déconnexion</button>
+                  </li>
+                  <!-- Affichage du nom et prénom de l'utilisateur -->
+                  <li class="nav-item" id="userInfo" style="display: none;">
+                    <a class="nav-link text-light" href="#">
+                        <i class="bi bi-person-circle me-1"></i><b><span id="userName"></span></b>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-page">
+        <!-- le contenu de la page -->
+    </main>
+
+    <footer class="bg-primary text-light py-4 footer">
+      <div class="container">
+        <div class="row">
+          <!-- Bloc Adresse -->
+          <div class="col-md-6">
+            <h3>Adresse</h3>
+            <p class="text-secondary">
+              Zoo National<br>
+              123 Rue des Animaux<br>
+              75000 Paris, France
+            </p>
+          </div>
+          <!-- Bloc Téléphone -->
+          <div class="col-md-6">
+            <h3>Contact</h3>
+            <p class="text-secondary">
+              Téléphone : <a href="tel:+33123456789" class="text-secondary">+33 1 23 45 67 89</a><br>
+              Email : <a href="mailto:info@zooexample.com" class="text-secondary">info@arcadia.com</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>    
+
+    <script src="/js/script.js"></script>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="/Router/router.js"></script>
+</body>
+</html>

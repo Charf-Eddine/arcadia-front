@@ -1,0 +1,148 @@
+@import url("/node_modules/bootstrap-icons/font/bootstrap-icons.min.css");
+@import 'custom';
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+    background-color: #E1E3E1;
+    flex-grow: 1;
+}
+
+footer.footer {
+    padding: 15px;
+    width: 100%;
+}
+
+footer {
+  margin-top: auto;  /* Pour pousser le footer vers le bas */
+}
+
+p {
+    font-family: $font-family-serif;
+    font-size: 18px;
+}
+
+.form-label {
+    color: $primary;
+}
+
+h1 {
+    font-family: $font-family-serif;
+    color: $primary;
+}
+
+div.password-box {
+  display: flex; 
+  align-items: center; 
+  background-color: #fff; 
+}
+
+label .bi {
+  font-size: 25px;
+}
+
+.password-box .bi {
+  font-size: 25px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+/*
+.bi::before {
+  color: var(--bs-primary);
+}
+*/
+.login-form {
+  max-width: 500px;
+  width: 100%;
+}
+
+/* Fixer la hauteur des images des slides*/
+.default-carousel {
+  .carousel-inner img {
+    height: 500px;
+    object-fit: cover;
+  }
+}
+
+/* Fixer la hauteur des images des cartes*/
+.card-img-top {
+  height: 250px; 
+  object-fit: cover;
+}
+
+.review-card {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid $primary;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+
+  .review-pseudo {
+      font-weight: bold;
+      color: $primary;
+  }
+
+  .review-date {
+      font-size: 0.9rem;
+      color: #888;
+  }
+
+  .review-comment {
+      margin-top: 10px;
+  }
+}
+
+.navbar-brand {
+  font-size: 44px;
+  font-family: 'Kaushan Script', cursive;
+}
+
+.navbar-nav .nav-link {
+  font-size: 18px;
+}
+
+.grid-cards {
+  .card {
+    cursor: pointer; /* Change le curseur pour indiquer que c'est cliquable */
+    transition: transform 0.2s; /* Transition douce pour l'effet de zoom */
+  }
+  
+  .card:hover {
+    transform: scale(1.05); /* Zoom léger au survol */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre au survol */
+  }
+  
+  .card:active {
+    transform: scale(0.98); /* Réduire légèrement la carte lors du clic */
+  }
+}
+
+.animal-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  top: 50%; /* Centrer verticalement */
+  transform: translateY(-50%);
+  width: 5%;
+}
+
+.carousel-control-prev {
+  left: -1%; /* Positionner à l'extrême gauche */
+}
+
+.carousel-control-next {
+  right: -1%; /* Positionner à l'extrême droite */
+}

@@ -1,0 +1,37 @@
+<div class="container p-4">
+  <h1 id="name" class="text-center"></h1>
+  
+  <div class="row mt-4">
+      <div class="col-md-6">
+          <div id="animal-detail">
+              <h3 class="text-primary">Détail de l'animal</h3>
+              <ul class="list-group">
+              <li class="list-group-item"><strong>Race:</strong> <span id="breed"></span></li>
+              <li class="list-group-item"><strong>Habitat:</strong> <span id="habitat"></span></li>
+              </ul>
+          </div>    
+          <div id="veterinary-report">
+              <h3 class="text-primary mt-3">Avis du vétérinaire</h3>
+              <ul class="list-group">
+                <li class="list-group-item"><strong>La nourriture proposée:</strong> <span id="food"></span></li>
+                <li class="list-group-item"><strong>Le grammage de la nourriture:</strong> <span id="foodWeight"></span></li>
+                <li class="list-group-item"><strong>État de l’animal:</strong> <span id="state"></span></li>
+                <li class="list-group-item"><strong>Détail de l’état de l’animal:</strong> <span id="stateDetail"></span></li>
+              </ul>
+          </div>            
+      </div>
+      <div class="col-md-6">
+      <!-- Carousel pour les images de l'animal -->
+      <div id="animalCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner" id="carousel-images">
+        </div>
+        <a class="carousel-control-prev" type="button" data-bs-target="#animalCarousel" data-bs-slide="prev" id="carousel-prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </a>
+        <a class="carousel-control-next" type="button" data-bs-target="#animalCarousel" data-bs-slide="next" id="carousel-next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

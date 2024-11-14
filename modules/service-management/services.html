@@ -1,0 +1,73 @@
+<div class="p-4">
+    <h1 class="text-center text-primary">Gestion des services</h1>
+    <button class="btn btn-primary mb-3 float-end" data-bs-toggle="modal" data-bs-target="#serviceModal" onclick="clearModal()">Créer un service</button>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Description</th>
+                <th style="width: 160px;">Actions</th>
+            </tr>
+        </thead>
+        <tbody id="serviceTableBody">
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center" id="pagination">
+        </ul>
+    </nav>
+</div>
+
+
+<!-- Modal création / édition service -->
+<div class="modal fade" id="serviceModal" tabindex="-1" aria-labelledby="serviceModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="serviceModalLabel">Edition utilisateur</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form id="serviceForm">
+                <input type="hidden" id="serviceId">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nom</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                    <div class="invalid-feedback">
+                      Le nom est requis
+                    </div>
+                </div>
+                <div class="mb-3">
+                  <label for="description" class="form-label">Description</label>
+                  <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+            <button type="button" class="btn btn-primary" onclick="saveService()">Enregistrer</button>
+          </div>
+      </div>
+    </div>
+</div>
+  
+<!-- Modal suppression service -->
+<div class="modal fade" id="deleteServiceModal" tabindex="-1" aria-labelledby="deleteServiceLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="deleteServiceLabel">Confirmation de suppression</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            Êtes-vous sûr de vouloir supprimer ce service ?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+            <button type="button" class="btn btn-danger" onclick="deleteService()">Confirmer</button>
+        </div> 
+      </div>
+    </div>
+</div>
