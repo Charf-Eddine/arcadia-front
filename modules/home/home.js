@@ -180,9 +180,9 @@ function displayAnimals(animals) {
 /*======================================================================================================================*/
 
 /*================================================== Avis des visiteurs ================================================*/
-let currentPage = 1;
-const resultsPerPage = 6;
-let visitorReviews = [];
+var currentPage = 1;
+var resultsPerPage = 6;
+var visitorReviews = [];
 
 // Fonction pour appeler l'API et récupérer la liste des avis
 fetch(apiUrl + "/visitor-reviews/list/accepted")
@@ -240,20 +240,19 @@ function updatePagination(totalPages) {
     paginationContainer.innerHTML = ''; 
 
     for (let i = 1; i <= totalPages; i++) {
-        const pageButton = document.createElement('button');
-        pageButton.className = 'btn btn-secondary mx-1';
-        pageButton.textContent = i;
-        pageButton.onclick = () => {
-            currentPage = i;
-            displayVisitorReviews(visitorReviews);
-        };
-
-        if (i === currentPage) {
-            pageButton.classList.add('active');
-        }
-
-        paginationContainer.appendChild(pageButton);
+        const pageItem = `
+        <li class="page-item ${i === currentPage ? 'active' : ''}">
+            <a class="page-link" href="#" onclick="changePage(${i}, event)">${i}</a>
+        </li>
+        `;
+        paginationContainer.insertAdjacentHTML('beforeend', pageItem);
     }
+}
+
+function changePage(page, event) {
+    event.preventDefault();
+    currentPage = page;
+    displayVisitorReviews(visitorReviews);
 }
 
 function formatDate(isoDate) {
