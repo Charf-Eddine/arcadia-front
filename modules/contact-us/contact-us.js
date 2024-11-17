@@ -83,14 +83,23 @@ function contactUs() {
     fetch(apiUrl + "/mailing/contact-us", requestOptions)
       .then((response) => {
         if(response.ok){
+            // Afficher un toast de succès
+            showToast('success', 'Mail envoyé avec succès');
+
+            // Réinitialiser les champs seulement après un envoi réussi
+            emailInput.value = "";
+            titleInput.value = "";
+            messageTextarea.value = "";
+
             return true;
         }
         else{
-            alert("Erreur d'envoi de mail");
+            // Afficher un toast d'erreur
+            showToast('danger', "Erreur d'envoi de mail");
         }
       })
-      .then((result) => {
-        alert("Mail envoyé avec succès");
-      })
-      .catch((error) => console.error(error));    
+      .catch((error) => {
+        console.error(error);
+        showToast('danger', "Erreur de connexion au serveur");
+      }); 
 }
