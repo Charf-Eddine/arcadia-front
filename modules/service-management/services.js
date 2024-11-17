@@ -46,8 +46,8 @@ function renderServices(page) {
                 <td>${service.name}</td>
                 <td>${service.description}</td>
                 <td>
-                    <button type="button" class="btn btn-primary btn-sm" onclick="editService(${service.id})" data-bs-toggle="modal" data-bs-target="#serviceModal">Éditer</button>
-                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(${service.id})" data-bs-toggle="modal" data-bs-target="#deleteServiceModal">Supprimer</button>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="editService('${service.id}')" data-bs-toggle="modal" data-bs-target="#serviceModal">Éditer</button>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('${service.id}')" data-bs-toggle="modal" data-bs-target="#deleteServiceModal">Supprimer</button>
                 </td>
             </tr>
         `;

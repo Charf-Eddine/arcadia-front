@@ -49,8 +49,8 @@ function renderHabitats(page) {
                 <td>${habitat.description}</td>
                 <td>${imagesHtml}</td>
                 <td>
-                    <button type="button" class="btn btn-primary btn-sm" onclick="editHabitat(${habitat.id})" data-bs-toggle="modal" data-bs-target="#habitatModal">Éditer</button>
-                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(${habitat.id})" data-bs-toggle="modal" data-bs-target="#deleteHabitatModal">Supprimer</button>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="editHabitat('${habitat.id}')" data-bs-toggle="modal" data-bs-target="#habitatModal">Éditer</button>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('${habitat.id}')" data-bs-toggle="modal" data-bs-target="#deleteHabitatModal">Supprimer</button>
                 </td>
             </tr>
         `;

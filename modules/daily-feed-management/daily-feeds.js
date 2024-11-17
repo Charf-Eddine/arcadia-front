@@ -62,8 +62,8 @@ function renderDailyFeeds(page) {
     paginatedDailyFeeds.forEach(dailyFeed => {
         const actionsColumn = role === 'employee' ? `
         <td>
-            <button type="button" class="btn btn-primary btn-sm" onclick="editDailyFeed(${dailyFeed.id})" data-bs-toggle="modal" data-bs-target="#dailyFeedModal">Éditer</button>
-            <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(${dailyFeed.id})" data-bs-toggle="modal" data-bs-target="#deleteDailyFeedModal">Supprimer</button>
+            <button type="button" class="btn btn-primary btn-sm" onclick="editDailyFeed('${dailyFeed.id}')" data-bs-toggle="modal" data-bs-target="#dailyFeedModal">Éditer</button>
+            <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('${dailyFeed.id}')" data-bs-toggle="modal" data-bs-target="#deleteDailyFeedModal">Supprimer</button>
         </td>
     ` : ``; // Colonne vide si l'utilisateur n'est pas employé
 
@@ -211,10 +211,10 @@ async function editDailyFeed(dailyFeedId) {
 
 function saveDailyFeed() {
     const passageDate = document.getElementById('passageDate').value;
-    const animalId = parseInt(document.getElementById('animalId').value, 10);
+    const animalId = document.getElementById('animalId').value;
     const food = document.getElementById('food').value;
     const foodWeight = parseFloat(document.getElementById('foodWeight').value);
-    const userId = parseInt(document.getElementById('userId').value, 10);
+    const userId = document.getElementById('userId').value;
 
     const dailyFeed = { passageDate, animalId, food, foodWeight, userId };
 

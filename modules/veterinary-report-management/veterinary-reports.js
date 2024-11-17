@@ -62,8 +62,8 @@ function renderVeterinaryReports(page) {
     paginatedVeterinaryReports.forEach(veterinaryReport => {
         const actionsColumn = role === 'veterinarian' ? `
             <td>
-                <button type="button" class="btn btn-primary btn-sm" onclick="editVeterinaryReport(${veterinaryReport.id})" data-bs-toggle="modal" data-bs-target="#veterinaryReportModal">Éditer</button>
-                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(${veterinaryReport.id})" data-bs-toggle="modal" data-bs-target="#deleteVeterinaryReportModal">Supprimer</button>
+                <button type="button" class="btn btn-primary btn-sm" onclick="editVeterinaryReport('${veterinaryReport.id}')" data-bs-toggle="modal" data-bs-target="#veterinaryReportModal">Éditer</button>
+                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('${veterinaryReport.id}')" data-bs-toggle="modal" data-bs-target="#deleteVeterinaryReportModal">Supprimer</button>
             </td>
         ` : ``; // Colonne vide si l'utilisateur n'est pas vétérinaire
 
@@ -218,12 +218,12 @@ async function editVeterinaryReport(veterinaryReportId) {
 
 function saveVeterinaryReport() {
     const passageDate = document.getElementById('passageDate').value;
-    const animalId = parseInt(document.getElementById('animalId').value, 10);
+    const animalId = document.getElementById('animalId').value;
     const food = document.getElementById('food').value;
     const foodWeight = parseFloat(document.getElementById('foodWeight').value);
     const state = document.getElementById('state').value;
     const stateDetail = document.getElementById('stateDetail').value;
-    const userId = parseInt(document.getElementById('userId').value, 10);
+    const userId = document.getElementById('userId').value;
 
     const veterinaryReport = { passageDate, animalId, food, foodWeight, state, stateDetail, userId };
 

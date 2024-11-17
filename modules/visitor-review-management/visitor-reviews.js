@@ -56,12 +56,12 @@ function renderVisitorReviews(page) {
         const actionsColumn = visitorReview.isVisible === true ? 
         `
         <td>
-            <button type="button" class="btn btn-danger btn-sm" onclick="rejectReview(${visitorReview.id})">Rejeter</button>
+            <button type="button" class="btn btn-danger btn-sm" onclick="rejectReview('${visitorReview.id}')">Rejeter</button>
         </td>
         ` :
         `
         <td>
-            <button type="button" class="btn btn-primary btn-sm" onclick="acceptReview(${visitorReview.id})">Accepter</button>
+            <button type="button" class="btn btn-primary btn-sm" onclick="acceptReview('${visitorReview.id}')">Accepter</button>
         </td>
         ` 
 

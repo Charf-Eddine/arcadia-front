@@ -48,8 +48,8 @@ function renderUsers(page) {
                 <td>${user.email}</td>
                 <td>${displayUserRole(user)}</td>
                 <td>
-                    <button type="button" class="btn btn-primary btn-sm" onclick="editUser(${user.id})" data-bs-toggle="modal" data-bs-target="#userModal">Éditer</button>
-                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(${user.id})" data-bs-toggle="modal" data-bs-target="#deleteUserModal">Supprimer</button>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="editUser('${user.id}')" data-bs-toggle="modal" data-bs-target="#userModal">Éditer</button>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('${user.id}')" data-bs-toggle="modal" data-bs-target="#deleteUserModal">Supprimer</button>
                 </td>
             </tr>
         `;
@@ -166,12 +166,11 @@ function saveUser() {
         })
         .then(response => {
             if(response.ok){
-                return response.json();
+                return response.text();
             }
             else{
                 alert("Erreur de création du nouvel utilisateur");
             }
-            return response.json();
         })     
         .then(data => {
             fetchUsers();

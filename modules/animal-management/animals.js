@@ -50,8 +50,8 @@ function renderAnimals(page) {
                 <td>${animal.habitat.name}</td>
                 <td>${imagesHtml}</td>
                 <td>
-                    <button type="button" class="btn btn-primary btn-sm" onclick="editAnimal(${animal.id})" data-bs-toggle="modal" data-bs-target="#animalModal">Éditer</button>
-                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(${animal.id})" data-bs-toggle="modal" data-bs-target="#deleteAnimalModal">Supprimer</button>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="editAnimal('${animal.id}')" data-bs-toggle="modal" data-bs-target="#animalModal">Éditer</button>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('${animal.id}')" data-bs-toggle="modal" data-bs-target="#deleteAnimalModal">Supprimer</button>
                 </td>
             </tr>
         `;
