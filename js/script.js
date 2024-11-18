@@ -1,4 +1,4 @@
-const apiUrl = "http://localhost:3001";
+const apiUrl = "https://arcadia-api-app-ddc64b47be8b.herokuapp.com";
 
 const tokenCookieName = "accessToken";
 const roleCookieName = "role";
