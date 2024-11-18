@@ -1,6 +1,7 @@
+const apiUrl = "http://localhost:3001";
+
 const tokenCookieName = "accessToken";
 const roleCookieName = "role";
-const apiUrl = "https://arcadia-api-app-ddc64b47be8b.herokuapp.com";
 
 const signoutButton =  document.getElementById("signoutButton");
 signoutButton.addEventListener("click", signout);
@@ -121,6 +122,27 @@ async function displayUserInfo() {
         console.error('Erreur lors du chargement du profil de l\'utilisateur:', error);
         throw error;
     }
+}
+
+// Fonction pour afficher un toast Bootstrap
+function showToast(type, message) {
+    const toastContainer = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.classList.add('toast', `bg-${type}`, 'text-white', 'fade');
+    toast.setAttribute('role', 'alert');
+    toast.setAttribute('aria-live', 'assertive');
+    toast.setAttribute('aria-atomic', 'true');
+    toast.innerHTML = `
+        <div class="toast-body">
+            ${message}
+        </div>
+    `;
+    toastContainer.appendChild(toast);
+
+    // Afficher et supprimer le toast après 5 secondes
+    const toastBootstrap = new bootstrap.Toast(toast);
+    toastBootstrap.show();
+    setTimeout(() => toast.remove(), 5000);
 }
 
 // Appeler la fonction pour afficher les infos de l'utilisateur

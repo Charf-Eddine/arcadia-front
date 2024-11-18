@@ -50,7 +50,7 @@ function renderVeterinaryReviews(page) {
                 <td>${veterinaryReview.habitat.name}</td>
                 <td>${veterinaryReview.comment}</td>
                 <td>
-                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(${veterinaryReview.id})" data-bs-toggle="modal" data-bs-target="#deleteVeterinaryReviewModal">Supprimer</button>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('${veterinaryReview.id}')" data-bs-toggle="modal" data-bs-target="#deleteVeterinaryReviewModal">Supprimer</button>
                 </td>
             </tr>
         `;
@@ -136,7 +136,7 @@ function clearModal() {
 
 function saveVeterinaryReview() {
     const date = new Date();
-    const habitatId = parseInt(document.getElementById('habitatId').value, 10);
+    const habitatId = document.getElementById('habitatId').value;
     const comment = document.getElementById('comment').value;
     const userId = userProfile.sub;
 
