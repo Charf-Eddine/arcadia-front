@@ -197,6 +197,8 @@ function saveHabitat() {
         },
         body: formData
     }).then(() => {
+        // Afficher un toast de succès
+        showToast('success', 'Données enregistées avec succès');
         fetchHabitats();
         document.getElementById('habitatForm').reset();
         selectedImages = []; // Réinitialiser les images sélectionnées

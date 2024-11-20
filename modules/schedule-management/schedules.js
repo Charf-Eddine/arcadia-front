@@ -99,6 +99,8 @@ function saveSchedule() {
         },
         body: JSON.stringify(schedule)
     }).then(() => {
+        // Afficher un toast de succès
+        showToast('success', 'Données enregistées avec succès');
         fetchSchedules();
         document.getElementById('scheduleForm').reset();
         document.querySelector('[data-bs-dismiss="modal"]').click();

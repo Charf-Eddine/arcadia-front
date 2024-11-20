@@ -173,6 +173,8 @@ function saveUser() {
             }
         })     
         .then(data => {
+            // Afficher un toast de succès
+            showToast('success', 'Données enregistées avec succès');
             fetchUsers();
             document.getElementById('userForm').reset();
             document.querySelector('[data-bs-dismiss="modal"]').click();

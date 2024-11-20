@@ -67,10 +67,10 @@ function displayHabitats(habitats) {
     const habitatsContainer = document.getElementById('habitat-container');
     habitatsContainer.innerHTML = '';
 
-    // Séparer les cartes en groupes de 4 pour chaque "slide"
+    // Séparer les cartes en groupes de 3 pour chaque "slide"
     const slides = [];
-    for (let i = 0; i < habitats.length; i += 4) {
-        const slideGroup = habitats.slice(i, i + 4);
+    for (let i = 0; i < habitats.length; i += 3) {
+        const slideGroup = habitats.slice(i, i + 3);
         slides.push(slideGroup);
     }
 
@@ -81,7 +81,7 @@ function displayHabitats(habitats) {
         if (index === 0) slide.classList.add('active'); // Première slide active par défaut
 
         const row = document.createElement('div');
-        row.classList.add('row', 'row-cols-1', 'row-cols-md-4', 'g-4', 'grid-cards');
+        row.classList.add('row', 'row-cols-1', 'row-cols-md-3', 'g-3', 'grid-cards');
 
         slideGroup.forEach(habitat => {
             const card = document.createElement('div');
@@ -282,6 +282,8 @@ function saveVisitorReview() {
         },
         body: JSON.stringify(visitorReview)
     }).then(() => {
+        // Afficher un toast de succès
+        showToast('success', 'Données enregistées avec succès');
         document.getElementById('visitorReviewForm').reset();
         document.querySelector('[data-bs-dismiss="modal"]').click();
     });
@@ -301,4 +303,4 @@ function scrollToHash() {
 scrollToHash();
 
 // Réessaie après un léger délai si le premier essai échoue
-setTimeout(scrollToHash, 100);
+setTimeout(scrollToHash, 1500);

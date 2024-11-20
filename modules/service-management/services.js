@@ -133,6 +133,8 @@ function saveService() {
             },
             body: JSON.stringify(service)
         }).then(() => {
+            // Afficher un toast de succès
+            showToast('success', 'Données enregistées avec succès');
             fetchServices();
             document.getElementById('serviceForm').reset();
             document.querySelector('[data-bs-dismiss="modal"]').click();

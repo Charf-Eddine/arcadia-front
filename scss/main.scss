@@ -7,9 +7,15 @@ html {
 }
 
 body {
+  font-family: $font-content;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-headline;
+  color: $primary;
 }
 
 main {
@@ -26,17 +32,7 @@ footer {
   margin-top: auto;  /* Pour pousser le footer vers le bas */
 }
 
-p {
-    font-family: $font-family-serif;
-    font-size: 18px;
-}
-
 .form-label {
-    color: $primary;
-}
-
-h1 {
-    font-family: $font-family-serif;
     color: $primary;
 }
 
@@ -55,11 +51,8 @@ label .bi {
   padding-left: 8px;
   padding-right: 8px;
 }
-/*
-.bi::before {
-  color: var(--bs-primary);
-}
-*/
+
+
 .login-form {
   max-width: 500px;
   width: 100%;
@@ -108,6 +101,15 @@ label .bi {
 
 .navbar-nav .nav-link {
   font-size: 18px;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='white' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.navbar-toggler {
+  border-color: white;
+  background-color: transparent;
 }
 
 .grid-cards {
