@@ -282,6 +282,8 @@ function saveVisitorReview() {
         },
         body: JSON.stringify(visitorReview)
     }).then(() => {
+        // Afficher un toast de succès
+        showToast('success', 'Données enregistées avec succès');
         document.getElementById('visitorReviewForm').reset();
         document.querySelector('[data-bs-dismiss="modal"]').click();
     });
@@ -301,4 +303,4 @@ function scrollToHash() {
 scrollToHash();
 
 // Réessaie après un léger délai si le premier essai échoue
-setTimeout(scrollToHash, 100);
+setTimeout(scrollToHash, 1500);

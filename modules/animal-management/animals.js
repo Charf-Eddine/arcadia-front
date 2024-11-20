@@ -256,6 +256,8 @@ function saveAnimal() {
         },
         body: formData
     }).then(() => {
+        // Afficher un toast de succès
+        showToast('success', 'Données enregistées avec succès');        
         fetchAnimals();
         document.getElementById('animalForm').reset();
         selectedImages = []; // Réinitialiser les images sélectionnées

@@ -237,6 +237,8 @@ function saveVeterinaryReport() {
             },
             body: JSON.stringify(veterinaryReport)
         }).then(() => {
+            // Afficher un toast de succès
+            showToast('success', 'Données enregistées avec succès');
             fetchVeterinaryReports();
             document.getElementById('veterinaryReportForm').reset();
             document.querySelector('[data-bs-dismiss="modal"]').click();
@@ -251,6 +253,8 @@ function saveVeterinaryReport() {
             },
             body: JSON.stringify(veterinaryReport)
         }).then(() => {
+            // Afficher un toast de succès
+            showToast('success', 'Données enregistées avec succès');
             fetchVeterinaryReports();
             document.getElementById('veterinaryReportForm').reset();
             document.querySelector('[data-bs-dismiss="modal"]').click();

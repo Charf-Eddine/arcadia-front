@@ -242,6 +242,8 @@ function saveDailyFeed() {
             },
             body: JSON.stringify(dailyFeed)
         }).then(() => {
+            // Afficher un toast de succès
+            showToast('success', 'Données enregistées avec succès');
             fetchDailyFeeds();
             document.getElementById('dailyFeedForm').reset();
             document.querySelector('[data-bs-dismiss="modal"]').click();

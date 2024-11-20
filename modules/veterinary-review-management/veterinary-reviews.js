@@ -151,6 +151,8 @@ function saveVeterinaryReview() {
         },
         body: JSON.stringify(veterinaryReview)
     }).then(() => {
+        // Afficher un toast de succès
+        showToast('success', 'Données enregistées avec succès');        
         fetchVeterinaryReviews();
         document.getElementById('veterinaryReviewForm').reset();
         document.querySelector('[data-bs-dismiss="modal"]').click();

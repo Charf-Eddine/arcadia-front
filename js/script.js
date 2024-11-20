@@ -142,7 +142,7 @@ function showToast(type, message) {
     // Afficher et supprimer le toast après 5 secondes
     const toastBootstrap = new bootstrap.Toast(toast);
     toastBootstrap.show();
-    setTimeout(() => toast.remove(), 5000);
+    setTimeout(() => toast.remove(), 3000);
 }
 
 // Appeler la fonction pour afficher les infos de l'utilisateur
