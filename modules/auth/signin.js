@@ -86,7 +86,10 @@ function checkCredentials(){
         setCookie(roleCookieName, result.role, 7);
         window.location.replace("/");
     })
-    .catch(error => console.log('error', error));
+    .catch(error => {
+        // Afficher un toast d'erreur
+        showToast('danger', "Email ou mot de passe incorrect");
+    });
 }
 
 const togglePassword = document.querySelector('.toggle-password');
