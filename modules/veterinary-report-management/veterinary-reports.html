@@ -39,14 +39,14 @@
               <input type="hidden" id="veterinaryReportId">
               <input type="hidden" id="userId">
               <div class="mb-3">
-                <label for="passageDate" class="form-label">Date et heure de passage</label>
+                <label for="passageDate" class="form-label">Date et heure de passage *</label>
                 <input type="datetime-local" class="form-control" id="passageDate" name="passageDate" required>
                 <div class="invalid-feedback">
                   La date et l'heure sont requises
                 </div>
               </div>
               <div class="mb-3">
-                <label for="animalId" class="form-label">Animal</label>
+                <label for="animalId" class="form-label">Animal *</label>
                 <select class="form-select" id="animalId" name="animalId" required>
                     <option value="" disabled selected>Sélectionner l'animal</option>
                 </select>
@@ -55,20 +55,20 @@
                 </div>
               </div>
               <div class="mb-3">
-                  <label for="food" class="form-label">Nourriture proposée</label>
+                  <label for="food" class="form-label">Nourriture proposée *</label>
                   <input type="text" class="form-control" id="food" name="food" required>
                   <div class="invalid-feedback">
                     La nourriture est requise
                   </div>
               </div>
               <div class="mb-3">
-                <label for="foodWeight" class="form-label">Grammage de de la nourriture</label>
+                <label for="foodWeight" class="form-label">Grammage de de la nourriture *</label>
                 <input type="number" class="form-control" id="foodWeight" name="foodWeight" required>
                 <div class="invalid-feedback">
                   Le grammage est requis
               </div>
               <div class="mb-3">
-                <label for="state" class="form-label">Etat de l'animal</label>
+                <label for="state" class="form-label">Etat de l'animal *</label>
                 <input type="text" class="form-control" id="state" name="state" required>
                 <div class="invalid-feedback">
                   L'état de l'animal est requis

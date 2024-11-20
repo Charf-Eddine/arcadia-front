@@ -48,8 +48,6 @@ export function initPage({ id }) {
         }
 
         if (animal.veterinaryReports && animal.veterinaryReports.length > 0) {
-            document.getElementById("food").textContent = animal.veterinaryReports[0].food;
-            document.getElementById("foodWeight").textContent = animal.veterinaryReports[0].foodWeight;
             document.getElementById("state").textContent = animal.veterinaryReports[0].state;
             document.getElementById("stateDetail").textContent = animal.veterinaryReports[0].stateDetail;
         }
